@@ -1,4 +1,5 @@
 # Stow .dotfiles
+sudo apt install stow
 sudo stow -D .
 sudo stow .
 
