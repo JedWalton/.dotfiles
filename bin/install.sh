@@ -1,6 +1,6 @@
 # Stow .dotfiles
-sudo stow -D .
-sudo stow .
+#sudo stow -D .
+#sudo stow .
 
 # Install blueman
 sudo apt install blueman -y
