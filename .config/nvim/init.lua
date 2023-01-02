@@ -49,6 +49,7 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'ellisonleao/gruvbox.nvim'
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -97,10 +98,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 -- Set highlight on search
 vim.o.hlsearch = false
-
 -- Make line numbers default
 vim.wo.number = true
-
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -120,10 +119,34 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
+
+vim.opt.nu = true
+vim.opt.relativenumber = true
+vim.opt.errorbells = false
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.wrap = false
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+vim.opt.termguicolors = true
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
+vim.opt.colorcolumn = "80"
+
+vim.opt.cmdheight = 1
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -156,7 +179,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'onedark',
+    theme = 'gruvbox',
     component_separators = '|',
     section_separators = '',
   },
@@ -457,9 +480,6 @@ map('n' ,'<leader>ev' ,':Vexplore<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>es' ,':Sexplore<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>et' ,':Texplore<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>el' ,':Lexplore<CR>', {noremap = true, silent = false})
-
-
-
 
 
 
