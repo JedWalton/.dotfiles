@@ -48,7 +48,6 @@ require('packer').startup(function(use)
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
-  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'ellisonleao/gruvbox.nvim'
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
@@ -461,7 +460,6 @@ map('n', '<leader>y', '"+y', {noremap = true, silent = false})
 map('v', '<leader>y', '"+y', {noremap = true, silent = false})
 map('n', '<leader>Y', '"+y$', {noremap = true, silent = false})
 
-
 -- Smart way to move between windows
 map('n', '<C-h>', '<C-W>h', {noremap = true, silent = false})
 map('n', '<C-j>', '<C-W>j', {noremap = true, silent = false})
@@ -481,5 +479,8 @@ map('n' ,'<leader>es' ,':Sexplore<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>et' ,':Texplore<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>el' ,':Lexplore<CR>', {noremap = true, silent = false})
 
+-- Neovim Buffers
+map('n' ,'<leader>bd' ,':bd<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>bw' ,':bw<CR>', {noremap = true, silent = false})
 
-
+-- Neovim Terminal
