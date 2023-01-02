@@ -451,6 +451,15 @@ map('n', '<leader>k', '<C-W>k', {noremap = true, silent = false})
 map('n', '<leader>l', '<C-W>l', {noremap = true, silent = false})
 
 -- Netrw
-map('n' ,'<leader>t' ,':Explore', {noremap = true, silent = false})
+map('n' ,'<leader>ee' ,':Explore<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>eh' ,':Hexplore<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>ev' ,':Vexplore<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>es' ,':Sexplore<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>et' ,':Texplore<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>el' ,':Lexplore<CR>', {noremap = true, silent = false})
+
+
+
+
 
 
