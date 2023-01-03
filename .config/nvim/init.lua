@@ -473,10 +473,10 @@ map('n', '<leader>k', '<C-W>k', {noremap = true, silent = false})
 map('n', '<leader>l', '<C-W>l', {noremap = true, silent = false})
 
 -- Resizing
-map('n', '<leader>rl', ':vertical resize +10<CR>', {noremap = true, silent = true})
-map('n', '<leader>rh', ':vertical resize -10<CR>', {noremap = true, silent = true})
-map('n', '<leader>rk', ':resize +10<CR>', {noremap = true, silent = true})
-map('n', '<leader>rj', ':resize -10<CR>', {noremap = true, silent = true})
+map('n', '<leader>rl', ':vertical resize +20<CR>', {noremap = true, silent = true})
+map('n', '<leader>rh', ':vertical resize -20<CR>', {noremap = true, silent = true})
+map('n', '<leader>rk', ':resize +20<CR>', {noremap = true, silent = true})
+map('n', '<leader>rj', ':resize -20<CR>', {noremap = true, silent = true})
 
 -- Netrw
 map('n' ,'<leader>ee' ,':Explore<CR>', {noremap = true, silent = false})
@@ -512,4 +512,4 @@ map('n' ,'<leader>tc' ,':tabclose<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>to' ,':tabonly<CR>', {noremap = true, silent = false})
 
 -- Neovim Terminal
--- 
+
