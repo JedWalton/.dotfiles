@@ -484,4 +484,23 @@ map('n' ,'<leader>el' ,':Lexplore<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>bd' ,':bd<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>bw' ,':bw<CR>', {noremap = true, silent = false})
 
+-- Fast Save
+map('n' ,'<leader>w' ,':w<CR>', {noremap = true, silent = false})
+
+-- Tabs 
+-- Go to tab by number
+map('n' ,'<leader>1' ,'1gt', {noremap = true, silent = false})
+map('n' ,'<leader>2' ,'2gt', {noremap = true, silent = false})
+map('n' ,'<leader>3' ,'3gt', {noremap = true, silent = false})
+map('n' ,'<leader>4' ,'4gt', {noremap = true, silent = false})
+map('n' ,'<leader>5' ,'5gt', {noremap = true, silent = false})
+map('n' ,'<leader>6' ,'6gt', {noremap = true, silent = false})
+map('n' ,'<leader>7' ,'7gt', {noremap = true, silent = false})
+map('n' ,'<leader>8' ,'8gt', {noremap = true, silent = false})
+map('n' ,'<leader>9' ,'9gt', {noremap = true, silent = false})
+map('n' ,'<leader>0' ,':tablast<CR>', {noremap = true, silent = false})
+
+map('n' ,'<leader>ts' ,':tab split<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>tc' ,':tabclose<CR>', {noremap = true, silent = false})
+
 -- Neovim Terminal
