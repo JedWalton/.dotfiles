@@ -1,4 +1,4 @@
--- Install packer
+-- nstall packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -473,10 +473,10 @@ map('n', '<leader>k', '<C-W>k', {noremap = true, silent = false})
 map('n', '<leader>l', '<C-W>l', {noremap = true, silent = false})
 
 -- Resizing
-map('n', '<leader>rl', ':vertical resize +20<CR>', {noremap = true, silent = true})
-map('n', '<leader>rh', ':vertical resize -20<CR>', {noremap = true, silent = true})
-map('n', '<leader>rk', ':resize +20<CR>', {noremap = true, silent = true})
-map('n', '<leader>rj', ':resize -20<CR>', {noremap = true, silent = true})
+map('n', '<A-l>', ':vertical resize +20<CR>', {noremap = true, silent = true})
+map('n', '<A-h>', ':vertical resize -20<CR>', {noremap = true, silent = true})
+map('n', '<A-k>', ':resize +20<CR>', {noremap = true, silent = true})
+map('n', '<A-j>', ':resize -20<CR>', {noremap = true, silent = true})
 
 -- Netrw
 map('n' ,'<leader>ee' ,':Explore<CR>', {noremap = true, silent = false})
