@@ -1,4 +1,4 @@
--- nstall packer
+-- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -60,6 +60,13 @@ require('packer').startup(function(use)
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+
+  -- Linter
+  -- use 'jose-elias-alvarez/null-ls.nvim'
+
+  -- DAP
+  -- use 'mfussenegger/nvim-dap'
+  -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -513,3 +520,41 @@ map('n' ,'<leader>to' ,':tabonly<CR>', {noremap = true, silent = false})
 
 -- Neovim Terminal
 
+-- Debugging
+-- C/C++/Rust
+-- local dap = require('dap')
+--
+-- dap.adapters.codelldb = {
+--   type = 'server',
+--   port = "${port}",
+--   executable = {
+--     -- CHANGE THIS to your path!
+--     command = '/usr/bin/codelldb-x86_64-linux/extension/adapter/codelldb',
+--     args = {"--port", "${port}"},
+--
+--     -- On windows you may have to uncomment this:
+--     -- detached = false,
+--   }
+-- }
+-- dap.configurations.cpp = {
+--   {
+--     name = "Launch file",
+--     type = "codelldb",
+--     request = "launch",
+--     program = function()
+--       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+--     end,
+--     cwd = '${workspaceFolder}',
+--     stopOnEntry = false,
+--   },
+-- }
+-- dap.configurations.c = dap.configurations.cpp
+-- dap.configurations.rust = dap.configurations.cpp
+
+-- To Do
+--------
+-- Dap 'nvim-dap' for Rust, TypeScript, Go
+-- Linters & formatters 'null-ls-nvim'
+-- CoPilot Integration.
+-- Git (plugins already added, not configured to taste yet)
+-- Tmux
