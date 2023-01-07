@@ -63,9 +63,14 @@ require('packer').startup(function(use)
 
   -- Linter
 
-
   -- DAP
   use 'puremourning/vimspector'
+
+  -- AutoPairs
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require("nvim-autopairs").setup {} end
+  }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -151,6 +156,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.colorcolumn = "80"
 
 vim.opt.cmdheight = 1
+
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -248,8 +254,9 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml','typescript', 'help' },
-
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
+    'typescript', 'html', 'css', 'json', 'help' },
+  autotag = { enable = true },
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
@@ -516,6 +523,8 @@ map('n' ,'<leader>tc' ,':tabclose<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>to' ,':tabonly<CR>', {noremap = true, silent = false})
 
 -- Debugging
+-- For C/C++/Rust use CodeLLDB
+--
 vim.cmd([[
 let g:vimspector_sidebar_width = 85
 let g:vimspector_bottombar_height = 15
@@ -530,6 +539,13 @@ map('n', "<leader>db", ":call vimspector#ToggleBreakpoint()<cr>", {noremap = tru
 map('n', "<leader>dw", ":call vimspector#AddWatch()<cr>", {noremap = true, silent = false})
 map('n', "<leader>de", ":call vimspector#Evaluate()<cr>", {noremap = true, silent = false})
 
+-- AutoPairs 
+local status, autopairs = pcall(require, "nvim-autopairs")
+if (not status) then return end
+
+autopairs.setup({
+  disable_filetype = { "TelescopePrompt" , "vim" },
+})
 
 -- Linting
 
