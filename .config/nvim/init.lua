@@ -62,11 +62,10 @@ require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
   -- Linter
-  -- use 'jose-elias-alvarez/null-ls.nvim'
+
 
   -- DAP
-  -- use 'mfussenegger/nvim-dap'
-  -- use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use 'puremourning/vimspector'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -103,10 +102,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Set highlight on search
-vim.o.hlsearch = false
 -- Make line numbers default
 vim.wo.number = true
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -122,7 +120,6 @@ vim.o.smartcase = true
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
@@ -251,7 +248,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml','typescript', 'help' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -518,38 +515,23 @@ map('n' ,'<leader>tt' ,':$tab split<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>tc' ,':tabclose<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>to' ,':tabonly<CR>', {noremap = true, silent = false})
 
--- Neovim Terminal
-
 -- Debugging
--- C/C++/Rust
--- local dap = require('dap')
---
--- dap.adapters.codelldb = {
---   type = 'server',
---   port = "${port}",
---   executable = {
---     -- CHANGE THIS to your path!
---     command = '/usr/bin/codelldb-x86_64-linux/extension/adapter/codelldb',
---     args = {"--port", "${port}"},
---
---     -- On windows you may have to uncomment this:
---     -- detached = false,
---   }
--- }
--- dap.configurations.cpp = {
---   {
---     name = "Launch file",
---     type = "codelldb",
---     request = "launch",
---     program = function()
---       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
---     end,
---     cwd = '${workspaceFolder}',
---     stopOnEntry = false,
---   },
--- }
--- dap.configurations.c = dap.configurations.cpp
--- dap.configurations.rust = dap.configurations.cpp
+vim.cmd([[
+let g:vimspector_sidebar_width = 85
+let g:vimspector_bottombar_height = 15
+let g:vimspector_terminal_maxwidth = 70
+]])
+map('n', "<leader>dl", ":call vimspector#Launch()<cr>", {noremap = true, silent = false})
+map('n', "<leader>dr", ":call vimspector#Reset()<cr>", {noremap = true, silent = false})
+map('n', "<leader>do", ":call vimspector#StepOver()<cr>", {noremap = true, silent = false})
+map('n', "<leader>dt", ":call vimspector#StepOut()<cr>", {noremap = true, silent = false})
+map('n', "<leader>di", ":call vimspector#StepInto()<cr>", {noremap = true, silent = false})
+map('n', "<leader>db", ":call vimspector#ToggleBreakpoint()<cr>", {noremap = true, silent = false})
+map('n', "<leader>dw", ":call vimspector#AddWatch()<cr>", {noremap = true, silent = false})
+map('n', "<leader>de", ":call vimspector#Evaluate()<cr>", {noremap = true, silent = false})
+
+
+-- Linting
 
 -- To Do
 --------
