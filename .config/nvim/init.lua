@@ -84,11 +84,24 @@ require('packer').startup(function(use)
             enabled = false,
             auto_refresh = false,
             keymap = {
-              jump_prev = "[",
-              jump_next = "]",
+              jump_prev = "[[",
+              jump_next = "]]",
               accept = "<CR>",
               refresh = "gr",
-              open = "<C-CR>"
+              open = "<M-CR>"
+            },
+          },
+          suggestion = {
+            enabled = false,
+            auto_trigger = false,
+            debounce = 75,
+            keymap = {
+              accept = "<M-l>",
+              accept_word = false,
+              accept_line = false,
+              next = "<M-]>",
+              prev = "<M-[>",
+              dismiss = "<C-]>",
             },
           },
           filetypes = {
@@ -119,7 +132,6 @@ require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
-
 
 -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
@@ -600,23 +612,6 @@ end)
 map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
 map('n', "<leader>cd", ":CopilotStop<CR>", {noremap = true, silent = false})
 
-
--- get me a list of common fugitive remaps in lua
-
--- fugitive remaps
-map('n', "<leader>gs", ":G<CR>", {noremap = true, silent = false})
-map('n', "<leader>gd", ":Gdiff<CR>", {noremap = true, silent = false})
-map('n', "<leader>gl", ":Git log<CR>", {noremap = true, silent = false})
-map('n', "<leader>gb", ":Git blame<CR>", {noremap = true, silent = false})
-map('n', "<leader>gC", ":Git commit -v<CR>", {noremap = true, silent = false})
-map('n', "<leader>gr", ":Gread<CR>", {noremap = true, silent = false})
-map('n', "<leader>gw", ":Gwrite<CR>", {noremap = true, silent = false})
-map('n', "<leader>gS", ":Git status<CR>", {noremap = true, silent = false})
-map('n', "<leader>gD", ":Gvdiffsplit<CR>", {noremap = true, silent = false})
-map('n', "<leader>gP", ":Git push<CR>", {noremap = true, silent = false})
-map('n', "<leader>gp", ":Gpull<CR>", {noremap = true, silent = false})
-map('n', "<leader>gR", ":Gremove<CR>", {noremap = true, silent = false})
-map('n', "<leader>gU", ":Gmove<CR>", {noremap = true, silent = false})
 
 -- Linting
 
