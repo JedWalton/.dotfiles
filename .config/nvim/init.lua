@@ -82,13 +82,14 @@ require('packer').startup(function(use)
       end)
     end,
   }
-  -- use {
-  --   'zbirenbaum/copilot-cmp',
-  --   after = { 'copilot.lua' },
-  --   config = function ()
-  --     require('copilot_cmp').setup()
-  --   end
-  -- }
+
+  use {
+    'zbirenbaum/copilot-cmp',
+    after = { 'copilot.lua' },
+    config = function ()
+      require('copilot_cmp').setup()
+    end
+  }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -570,7 +571,6 @@ autopairs.setup({
 })
 
 -- CoPilot
-require("copilot").setup()
 
 -- require('copilot_cmp').setup {
 --   method = "getCompletionsCycling",
