@@ -109,6 +109,8 @@ require('packer').startup(function(use)
     end,
   }
 
+  use { 'jose-elias-alvarez/null-ls.nvim' }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -601,7 +603,6 @@ map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
 map('n', "<leader>cd", ":CopilotStop<CR>", {noremap = true, silent = false})
 
 
-
 -- fugitive remaps
 map('n', "<leader>gs", ":G<CR>", {noremap = true, silent = false})
 map('n', "<leader>gd", ":Gdiff<CR>", {noremap = true, silent = false})
@@ -613,11 +614,19 @@ map('n', "<leader>gw", ":Gwrite<CR>", {noremap = true, silent = false})
 map('n', "<leader>gS", ":Git status<CR>", {noremap = true, silent = false})
 map('n', "<leader>gD", ":Gvdiffsplit<CR>", {noremap = true, silent = false})
 map('n', "<leader>gP", ":Git push<CR>", {noremap = true, silent = false})
-map('n', "<leader>gp", ":Gpull<CR>", {noremap = true, silent = false})
-map('n', "<leader>gR", ":Git remove<CR>", {noremap = true, silent = false})
-map('n', "<leader>gU", ":Gmove<CR>", {noremap = true, silent = false})
+map('n', "<leader>gp", ":Git pull<CR>", {noremap = true, silent = false})
 
--- Linting
+-- Null-ls
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.completion.spell,
+    },
+})
+
 
 -- To Do
 --------
