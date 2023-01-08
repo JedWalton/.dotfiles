@@ -72,6 +72,24 @@ require('packer').startup(function(use)
     config = function() require("nvim-autopairs").setup {} end
   }
 
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function ()
+      vim.schedule(function()
+        require("copilot").setup()
+      end)
+    end,
+  }
+  -- use {
+  --   'zbirenbaum/copilot-cmp',
+  --   after = { 'copilot.lua' },
+  --   config = function ()
+  --     require('copilot_cmp').setup()
+  --   end
+  -- }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -455,6 +473,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    -- { name = "copilot", group_index = 2 },
   },
 }
 
@@ -539,6 +558,9 @@ map('n', "<leader>db", ":call vimspector#ToggleBreakpoint()<cr>", {noremap = tru
 map('n', "<leader>dw", ":call vimspector#AddWatch()<cr>", {noremap = true, silent = false})
 map('n', "<leader>de", ":call vimspector#Evaluate()<cr>", {noremap = true, silent = false})
 
+-- Fugitive Git bindings
+map('n', "<leader>ga", ":Git add %:p<CR><CR>", {noremap = true, silent = false})
+
 -- AutoPairs 
 local status, autopairs = pcall(require, "nvim-autopairs")
 if (not status) then return end
@@ -546,6 +568,13 @@ if (not status) then return end
 autopairs.setup({
   disable_filetype = { "TelescopePrompt" , "vim" },
 })
+
+-- CoPilot
+require("copilot").setup()
+
+-- require('copilot_cmp').setup {
+--   method = "getCompletionsCycling",
+-- }
 
 -- Linting
 
