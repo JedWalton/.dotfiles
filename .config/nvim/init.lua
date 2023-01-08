@@ -602,7 +602,7 @@ end)
 map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
 
 -- fugitive remaps
-map('n', "<leader>gs", ":G<CR>", {noremap = true, silent = false})
+map('n', "<leader>G", ":G<CR>", {noremap = true, silent = false})
 map('n', "<leader>ga", ":!Git add .<CR>", {noremap = true, silent = false})
 map('n', "<leader>gd", ":Gdiff<CR>", {noremap = true, silent = false})
 map('n', "<leader>gl", ":Git log<CR>", {noremap = true, silent = false})
