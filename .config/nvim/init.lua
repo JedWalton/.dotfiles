@@ -608,8 +608,6 @@ map('n', "<leader>gd", ":Gdiff<CR>", {noremap = true, silent = false})
 map('n', "<leader>gl", ":Git log<CR>", {noremap = true, silent = false})
 map('n', "<leader>gb", ":Git blame<CR>", {noremap = true, silent = false})
 map('n', "<leader>gC", ":Git commit -v<CR>", {noremap = true, silent = false})
-map('n', "<leader>gr", ":Gread<CR>", {noremap = true, silent = false})
-map('n', "<leader>gw", ":Gwrite<CR>", {noremap = true, silent = false})
 map('n', "<leader>gS", ":Git status<CR>", {noremap = true, silent = false})
 map('n', "<leader>gD", ":Gvdiffsplit<CR>", {noremap = true, silent = false})
 map('n', "<leader>gP", ":Git push<CR>", {noremap = true, silent = false})
@@ -629,6 +627,8 @@ null_ls.setup({
 
 -- To Do
 --------
--- vimspector for TypeScript, Go
+-- vimspector for TypeScript, Go -- Get better at debugging!
 -- Tmux
 -- Investigate how doable Neovim can be for Java
+-- Set up LuaSnip snippets
+
