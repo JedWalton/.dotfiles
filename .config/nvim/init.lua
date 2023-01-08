@@ -83,14 +83,6 @@ require('packer').startup(function(use)
     end,
   }
 
-  use {
-    'zbirenbaum/copilot-cmp',
-    after = { 'copilot.lua' },
-    config = function ()
-      require('copilot_cmp').setup()
-    end
-  }
-
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -474,7 +466,6 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    -- { name = "copilot", group_index = 2 },
   },
 }
 
