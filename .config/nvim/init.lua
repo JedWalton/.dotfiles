@@ -609,9 +609,7 @@ cmp.event:on("menu_closed", function()
   vim.b.copilot_suggestion_hidden = false
 end)
 
-
 map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
-map('n', "<leader>cs", ":Copilot suggestion<CR>", {noremap = true, silent = false})
 map('n', "<leader>cd", ":CopilotStop<CR>", {noremap = true, silent = false})
 
 
