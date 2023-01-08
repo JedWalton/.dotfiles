@@ -7,6 +7,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
+
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
@@ -75,11 +76,49 @@ require('packer').startup(function(use)
   use {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
-    config = function ()
-      vim.schedule(function()
-        require("copilot").setup()
-      end)
+    event = "VimEnter",
+    config = function()
+      vim.defer_fn(function()
+        require('copilot').setup({
+          panel = {
+            enabled = false,
+            auto_refresh = false,
+            keymap = {
+              jump_prev = "[[",
+              jump_next = "]]",
+              accept = "<CR>",
+              refresh = "gr",
+              open = "<M-CR>"
+            },
+          },
+          suggestion = {
+            enabled = false,
+            auto_trigger = false,
+            debounce = 75,
+            keymap = {
+              accept = "<M-l>",
+              accept_word = false,
+              accept_line = false,
+              next = "<M-]>",
+              prev = "<M-[>",
+              dismiss = "<C-]>",
+            },
+          },
+          filetypes = {
+            yaml = false,
+            markdown = false,
+            help = false,
+            gitcommit = false,
+            gitrebase = false,
+            hgcommit = false,
+            svn = false,
+            cvs = false,
+            ["."] = false,
+          },
+          copilot_node_command = 'node', -- Node.js version must be > 16.x
+          server_opts_overrides = {},
+        })
+      end, 100)
     end,
   }
 
@@ -562,10 +601,19 @@ autopairs.setup({
 })
 
 -- CoPilot
+cmp.event:on("menu_opened", function()
+  vim.b.copilot_suggestion_hidden = true
+end)
 
--- require('copilot_cmp').setup {
---   method = "getCompletionsCycling",
--- }
+cmp.event:on("menu_closed", function()
+  vim.b.copilot_suggestion_hidden = false
+end)
+
+
+map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
+map('n', "<leader>cs", ":Copilot suggestion<CR>", {noremap = true, silent = false})
+map('n', "<leader>cd", ":CopilotStop<CR>", {noremap = true, silent = false})
+
 
 -- Linting
 
