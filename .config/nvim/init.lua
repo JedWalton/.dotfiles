@@ -601,7 +601,6 @@ map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
 map('n', "<leader>cd", ":CopilotStop<CR>", {noremap = true, silent = false})
 
 
--- get me a list of common fugitive remaps in lua
 
 -- fugitive remaps
 map('n', "<leader>gs", ":G<CR>", {noremap = true, silent = false})
@@ -615,7 +614,7 @@ map('n', "<leader>gS", ":Git status<CR>", {noremap = true, silent = false})
 map('n', "<leader>gD", ":Gvdiffsplit<CR>", {noremap = true, silent = false})
 map('n', "<leader>gP", ":Git push<CR>", {noremap = true, silent = false})
 map('n', "<leader>gp", ":Gpull<CR>", {noremap = true, silent = false})
-map('n', "<leader>gR", ":Gremove<CR>", {noremap = true, silent = false})
+map('n', "<leader>gR", ":Git remove<CR>", {noremap = true, silent = false})
 map('n', "<leader>gU", ":Gmove<CR>", {noremap = true, silent = false})
 
 -- Linting
