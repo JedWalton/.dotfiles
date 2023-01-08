@@ -629,8 +629,6 @@ null_ls.setup({
 
 -- To Do
 --------
--- Dap 'nvim-dap' for Rust, TypeScript, Go
--- Linters & formatters 'null-ls-nvim'
--- CoPilot Integration.
--- Git (plugins already added, not configured to taste yet)
+-- vimspector for TypeScript, Go
 -- Tmux
+-- Investigate how doable Neovim can be for Java
