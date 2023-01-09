@@ -603,7 +603,6 @@ map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
 
 -- fugitive remaps
 map('n', "<leader>G", ":G<CR>", {noremap = true, silent = false})
-map('n', "<leader>ga", ":!Git add .<CR>", {noremap = true, silent = false})
 map('n', "<leader>gd", ":Gdiff<CR>", {noremap = true, silent = false})
 map('n', "<leader>gl", ":Git log<CR>", {noremap = true, silent = false})
 map('n', "<leader>gb", ":Git blame<CR>", {noremap = true, silent = false})
@@ -620,7 +619,7 @@ null_ls.setup({
     sources = {
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.diagnostics.eslint_d,
-        null_ls.builtins.completion.spell,
+        -- null_ls.builtins.completion.spell,
     },
 })
 
