@@ -643,9 +643,9 @@ end
 
 local M = {}
 
-_.g = {}
-
-_.g.autocommand_callbacks = {}
+-- _.g = {}
+--
+-- _.g.autocommand_callbacks = {}
 
 local callback_index = 0
 
@@ -670,28 +670,29 @@ function M.augroup(group, fn)
 end
 
 
+
 local function prettier()
   return {
     exe = 'prettier',
-    args = {
-      '--config-precedence',
-      'prefer-file',
-      '--single-quote',
-      '--no-bracket-spacing',
-      '--prose-wrap',
-      'always',
-      '--arrow-parens',
-      'always',
-      '--trailing-comma',
-      'all',
-      '--no-semi',
-      '--end-of-line',
-      'lf',
-      '--print-width',
-      vim.bo.textwidth,
-      '--stdin-filepath',
-      vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
-    },
+    -- args = {
+    --   '--config-precedence',
+    --   'prefer-file',
+    --   '--single-quote',
+    --   '--no-bracket-spacing',
+    --   '--prose-wrap',
+    --   'always',
+    --   '--arrow-parens',
+    --   'always',
+    --   '--trailing-comma',
+    --   'all',
+    --   '--no-semi',
+    --   '--end-of-line',
+    --   'lf',
+    --   '--print-width',
+    --   vim.bo.textwidth,
+    --   '--stdin-filepath',
+    --   vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
+    -- },
     stdin = true,
   }
 end
