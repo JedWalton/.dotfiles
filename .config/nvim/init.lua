@@ -107,7 +107,7 @@ require('packer').startup(function(use)
     end,
   }
 
-  use { 'jose-elias-alvarez/null-ls.nvim' }
+  -- use { 'jose-elias-alvarez/null-ls.nvim' }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -612,7 +612,7 @@ map('n', "<leader>gP", ":Git push<CR>", {noremap = true, silent = false})
 map('n', "<leader>gp", ":Git pull<CR>", {noremap = true, silent = false})
 
 -- Null-ls
-local null_ls = require("null-ls")
+--local null_ls = require("null-ls")
 --
 -- null_ls.setup({
 --     sources = {
@@ -624,7 +624,7 @@ local null_ls = require("null-ls")
 
 -- Workspace remaps
 map('n', "<leader>wc", ":pwd<CR>", { desc="[W]orkspace [C]urrent", noremap = true, silent = false})
-map('n', "<leader>wd:", ":cd %:p:h<CR>:pwd<CR>", { desc="[W]orkspace [D]irectory", noremap = true, silent = false })
+map('n', "<leader>wd", ":cd %:p:h<CR>:pwd<CR>", { desc="[W]orkspace [D]irectory", noremap = true, silent = false })
 map('n', "<leader>wh", ":cd <CR>:pwd<CR>", {noremap = true, silent = false})
 
 
