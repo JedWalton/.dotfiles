@@ -109,6 +109,8 @@ require('packer').startup(function(use)
 
   use 'mfussenegger/nvim-lint'
 
+  require('packer').use { 'mhartington/formatter.nvim' }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -630,6 +632,168 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint()
   end,
 })
+
+-- Formatters
+local has_formatter, formatter = pcall(require, 'formatter')
+
+if not has_formatter then
+  return
+end
+
+
+local M = {}
+
+_.g = {}
+
+_.g.autocommand_callbacks = {}
+
+local callback_index = 0
+
+function M.autocmd(name, pattern, cmd)
+  local cmd_type = type(cmd)
+  if cmd_type == 'function' then
+    local key = '_' .. callback_index
+    callback_index = callback_index + 1
+    _.g.autocommand_callbacks[key] = cmd
+    cmd = 'lua _.g.autocommand_callbacks.' .. key .. '()'
+  elseif cmd_type ~= 'string' then
+    error('autocmd(): unsupported cmd type: ' .. cmd_type)
+  end
+  vim.cmd('autocmd ' .. name .. ' ' .. pattern .. ' ' .. cmd)
+end
+
+function M.augroup(group, fn)
+  vim.api.nvim_command('augroup ' .. group)
+  vim.api.nvim_command 'autocmd!'
+  fn()
+  vim.api.nvim_command 'augroup END'
+end
+
+
+local function prettier()
+  return {
+    exe = 'prettier',
+    args = {
+      '--config-precedence',
+      'prefer-file',
+      '--single-quote',
+      '--no-bracket-spacing',
+      '--prose-wrap',
+      'always',
+      '--arrow-parens',
+      'always',
+      '--trailing-comma',
+      'all',
+      '--no-semi',
+      '--end-of-line',
+      'lf',
+      '--print-width',
+      vim.bo.textwidth,
+      '--stdin-filepath',
+      vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
+    },
+    stdin = true,
+  }
+end
+
+local function shfmt()
+  return {
+    exe = 'shfmt',
+    args = { '-' },
+    stdin = true,
+  }
+end
+
+-- M.augroup('__formatter__', function()
+--   M.autocmd('BufWritePre', '*', 'FormatWrite')
+-- end)
+
+formatter.setup {
+  logging = false,
+  filetype = {
+    javascript = { prettier },
+    typescript = { prettier },
+    javascriptreact = { prettier },
+    typescriptreact = { prettier },
+    vue = { prettier },
+    ['javascript.jsx'] = { prettier },
+    ['typescript.tsx'] = { prettier },
+    markdown = { prettier },
+    css = { prettier },
+    json = { prettier },
+    jsonc = { prettier },
+    scss = { prettier },
+    less = { prettier },
+    yaml = { prettier },
+    graphql = { prettier },
+    html = { prettier },
+    sh = { shfmt },
+    bash = { shfmt },
+    reason = {
+      function()
+        return {
+          exe = 'refmt',
+          stdin = true,
+        }
+      end,
+    },
+    rust = {
+      function()
+        return {
+          exe = 'rustfmt',
+          args = { '--emit=stdout' },
+          stdin = true,
+        }
+      end,
+    },
+    python = {
+      function()
+        return {
+          exe = 'black',
+          args = { '--quiet', '-' },
+          stdin = true,
+        }
+      end,
+    },
+    go = {
+      function()
+        return {
+          exe = 'gofmt',
+          stdin = true,
+        }
+      end,
+    },
+    nix = {
+      function()
+        return {
+          exe = 'nixpkgs-fmt',
+          stdin = true,
+        }
+      end,
+    },
+    lua = {
+      function()
+        return {
+          exe = 'stylua',
+          args = {
+            '--indent-type',
+            'Spaces',
+            '--line-endings',
+            'Unix',
+            '--quote-style',
+            'AutoPreferSingle',
+            '--indent-width',
+            vim.bo.tabstop,
+            '--column-width',
+            vim.bo.textwidth,
+            '-',
+          },
+          stdin = true,
+        }
+      end,
+    },
+  },
+}
 
 -- To Do
 --------
