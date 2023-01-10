@@ -14,6 +14,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd([[packadd packer.nvim]])
 end
 
+
 require('packer').startup(function(use)
   -- Package manager
   use('wbthomason/packer.nvim')
@@ -79,6 +80,7 @@ require('packer').startup(function(use)
   -- DAP
   use('puremourning/vimspector')
 
+
   -- AutoPairs
   use({
     'windwp/nvim-autopairs',
@@ -95,11 +97,11 @@ require('packer').startup(function(use)
       vim.defer_fn(function()
         require('copilot').setup({
           panel = {
-            enabled = false,
+            enabled = true,
             auto_refresh = false,
             keymap = {
-              jump_prev = '[',
-              jump_next = ']',
+              jump_prev = '[[',
+              jump_next = ']]',
               accept = '<CR>',
               refresh = 'gr',
               open = '<C-CR>',
@@ -709,6 +711,7 @@ end)
 
 map('n', '<leader>cp', ':Copilot panel<CR>', { noremap = true, silent = false })
 
+
 -- fugitive remaps
 map('n', '<leader>G', ':G<CR>', { noremap = true, silent = false })
 map('n', '<leader>gd', ':Gdiff<CR>', { noremap = true, silent = false })
@@ -735,7 +738,7 @@ map(
 )
 map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
 
--- Installs linters for these languages.
+-- Install linters for these languages.
 -- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
 --     'typescript', 'html', 'css', 'json', 'help' },
 -- Linters
@@ -907,6 +910,7 @@ formatter.setup({
     },
   },
 })
+
 
 -- To Do
 --------
