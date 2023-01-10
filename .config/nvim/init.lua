@@ -407,6 +407,7 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -624,6 +625,11 @@ local null_ls = require("null-ls")
 --         -- null_ls.builtins.completion.spell,
 --     },
 -- })
+
+-- Workspace remaps
+map('n', "<leader>wc", ":cd %:p:h<CR>:pwd<CR>", { desc="[W]orkspace [C]urrent", noremap = true, silent = false})
+map('n', "<leader>wd", ":cd %:p:h<CR>:pwd<CR>", {noremap = true, silent = false})
+map('n', "<leader>wh", ":cd <CR>:pwd<CR>", {noremap = true, silent = false})
 
 -- jdtls only works for JAVA 17+
 -- local jdtls_ok, jdtls = pcall(require, "jdtls")
