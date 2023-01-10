@@ -545,7 +545,7 @@ map('n' ,'<leader>bd' ,':bd<CR>', {noremap = true, silent = false})
 map('n' ,'<leader>bw' ,':bw<CR>', {noremap = true, silent = false})
 
 -- Fast Save
-map('n' ,'<leader>w' ,':w<CR>', {noremap = true, silent = false})
+map('n' ,'<leader>ww' ,':w<CR>', {noremap = true, silent = false})
 
 -- Tabs 
 -- Go to tab by number
@@ -627,8 +627,8 @@ local null_ls = require("null-ls")
 -- })
 
 -- Workspace remaps
-map('n', "<leader>wc", ":cd %:p:h<CR>:pwd<CR>", { desc="[W]orkspace [C]urrent", noremap = true, silent = false})
-map('n', "<leader>wd", ":cd %:p:h<CR>:pwd<CR>", {noremap = true, silent = false})
+map('n', "<leader>wc", ":pwd<CR>", { desc="[W]orkspace [C]urrent", noremap = true, silent = false})
+map('n', "<leader>wd:", ":cd %:p:h<CR>:pwd<CR>", { desc="[W]orkspace [D]irectory", noremap = true, silent = false })
 map('n', "<leader>wh", ":cd <CR>:pwd<CR>", {noremap = true, silent = false})
 
 -- jdtls only works for JAVA 17+
