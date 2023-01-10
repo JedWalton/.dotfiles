@@ -107,7 +107,7 @@ require('packer').startup(function(use)
     end,
   }
 
-  -- use { 'jose-elias-alvarez/null-ls.nvim' }
+  use 'mfussenegger/nvim-lint'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -611,22 +611,25 @@ map('n', "<leader>gD", ":Gvdiffsplit<CR>", {noremap = true, silent = false})
 map('n', "<leader>gP", ":Git push<CR>", {noremap = true, silent = false})
 map('n', "<leader>gp", ":Git pull<CR>", {noremap = true, silent = false})
 
--- Null-ls
---local null_ls = require("null-ls")
---
--- null_ls.setup({
---     sources = {
---         null_ls.builtins.formatting.prettier,
---         null_ls.builtins.diagnostics.eslint_d,
---         -- null_ls.builtins.completion.spell,
---     },
--- })
-
 -- Workspace remaps
 map('n', "<leader>wc", ":pwd<CR>", { desc="[W]orkspace [C]urrent", noremap = true, silent = false})
 map('n', "<leader>wd", ":cd %:p:h<CR>:pwd<CR>", { desc="[W]orkspace [D]irectory", noremap = true, silent = false })
 map('n', "<leader>wh", ":cd <CR>:pwd<CR>", {noremap = true, silent = false})
 
+
+-- Installs linters for these languages.
+-- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
+--     'typescript', 'html', 'css', 'json', 'help' },
+-- Linters
+require('lint').linters_by_ft = {
+  markdown = {'vale',},
+  typescript = {'eslint_d',}
+}
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
 
 -- To Do
 --------
