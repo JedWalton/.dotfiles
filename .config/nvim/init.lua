@@ -1,18 +1,24 @@
 -- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   is_bootstrap = true
-  vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-  vim.cmd [[packadd packer.nvim]]
+  vim.fn.system({
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path,
+  })
+  vim.cmd([[packadd packer.nvim]])
 end
-
 
 require('packer').startup(function(use)
   -- Package manager
-  use 'wbthomason/packer.nvim'
+  use('wbthomason/packer.nvim')
 
-  use { -- LSP Configuration & Plugins
+  use({ -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
       -- Automatically install LSPs to stdpath for neovim
@@ -25,56 +31,66 @@ require('packer').startup(function(use)
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
-  }
+  })
 
-  use { -- Autocompletion
+  use({ -- Autocompletion
     'hrsh7th/nvim-cmp',
     requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
-  }
+  })
 
-  use { -- Highlight, edit, and navigate code
+  use({ -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     run = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
+      pcall(require('nvim-treesitter.install').update({ with_sync = true }))
     end,
-  }
+  })
 
-  use { -- Additional text objects via treesitter
+  use({ -- Additional text objects via treesitter
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
-  }
+  })
 
   -- Git related plugins
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
+  use('tpope/vim-fugitive')
+  use('tpope/vim-rhubarb')
+  use('lewis6991/gitsigns.nvim')
 
   -- use 'ellisonleao/gruvbox.nvim'
-  use 'folke/tokyonight.nvim'
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use('folke/tokyonight.nvim')
+  use('nvim-lualine/lualine.nvim') -- Fancier statusline
+  use('lukas-reineke/indent-blankline.nvim') -- Add indentation guides even on blank lines
+  use('numToStr/Comment.nvim') -- "gc" to comment visual regions/lines
+  use('tpope/vim-sleuth') -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+  use({
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    requires = { 'nvim-lua/plenary.nvim' },
+  })
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+  use({
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make',
+    cond = vim.fn.executable('make') == 1,
+  })
 
   -- DAP
-  use 'puremourning/vimspector'
+  use('puremourning/vimspector')
 
   -- AutoPairs
-  use {
+  use({
     'windwp/nvim-autopairs',
-    config = function() require("nvim-autopairs").setup {} end
-  }
+    config = function()
+      require('nvim-autopairs').setup({})
+    end,
+  })
 
-  use {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "VimEnter",
+  use({
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'VimEnter',
     config = function()
       vim.defer_fn(function()
         require('copilot').setup({
@@ -82,11 +98,11 @@ require('packer').startup(function(use)
             enabled = false,
             auto_refresh = false,
             keymap = {
-              jump_prev = "[",
-              jump_next = "]",
-              accept = "<CR>",
-              refresh = "gr",
-              open = "<C-CR>"
+              jump_prev = '[',
+              jump_next = ']',
+              accept = '<CR>',
+              refresh = 'gr',
+              open = '<C-CR>',
             },
           },
           filetypes = {
@@ -98,18 +114,18 @@ require('packer').startup(function(use)
             hgcommit = false,
             svn = false,
             cvs = false,
-            ["."] = false,
+            ['.'] = false,
           },
           copilot_node_command = 'node', -- Node.js version must be > 16.x
           server_opts_overrides = {},
         })
       end, 100)
     end,
-  }
+  })
 
-  use 'mfussenegger/nvim-lint'
+  use('mfussenegger/nvim-lint')
 
-  require('packer').use { 'mhartington/formatter.nvim' }
+  require('packer').use({ 'mhartington/formatter.nvim' })
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -122,17 +138,16 @@ require('packer').startup(function(use)
   end
 end)
 
-
 -- When we are bootstrapping a configuration, it doesn't
 -- make sense to execute the rest of the init.lua.
 --
 -- You'll need to restart nvim, and then it will work.
 if is_bootstrap then
-  print '=================================='
-  print '    Plugins are being installed'
-  print '    Wait until Packer completes,'
-  print '       then restart nvim'
-  print '=================================='
+  print('==================================')
+  print('    Plugins are being installed')
+  print('    Wait until Packer completes,')
+  print('       then restart nvim')
+  print('==================================')
   return
 end
 
@@ -141,7 +156,7 @@ local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'source <afile> | silent! LspStop | silent! LspStart | PackerCompile',
   group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
+  pattern = vim.fn.expand('$MYVIMRC'),
 })
 
 -- [[ Setting options ]]
@@ -185,18 +200,17 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
-vim.opt.colorcolumn = "80"
+vim.opt.signcolumn = 'yes'
+vim.opt.isfname:append('@-@')
+vim.opt.colorcolumn = '80'
 
 vim.opt.cmdheight = 1
-
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -226,28 +240,28 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Set lualine as statusline
 -- See `:help lualine.txt`
-require('lualine').setup {
+require('lualine').setup({
   options = {
     icons_enabled = false,
     theme = 'tokyonight',
     component_separators = '|',
     section_separators = '',
   },
-}
+})
 
 -- Enable Comment.nvim
 require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
+require('indent_blankline').setup({
   char = '┊',
   show_trailing_blankline_indent = false,
-}
+})
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
-require('gitsigns').setup {
+require('gitsigns').setup({
   signs = {
     add = { text = '+' },
     change = { text = '~' },
@@ -255,11 +269,11 @@ require('gitsigns').setup {
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
   },
-}
+})
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
+require('telescope').setup({
   defaults = {
     mappings = {
       i = {
@@ -268,34 +282,83 @@ require('telescope').setup {
       },
     },
   },
-}
+})
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set(
+  'n',
+  '<leader>?',
+  require('telescope.builtin').oldfiles,
+  { desc = '[?] Find recently opened files' }
+)
+vim.keymap.set(
+  'n',
+  '<leader><space>',
+  require('telescope.builtin').buffers,
+  { desc = '[ ] Find existing buffers' }
+)
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+  require('telescope.builtin').current_buffer_fuzzy_find(
+    require('telescope.themes').get_dropdown({
+      winblend = 10,
+      previewer = false,
+    })
+  )
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set(
+  'n',
+  '<leader>sf',
+  require('telescope.builtin').find_files,
+  { desc = '[S]earch [F]iles' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>sh',
+  require('telescope.builtin').help_tags,
+  { desc = '[S]earch [H]elp' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>sw',
+  require('telescope.builtin').grep_string,
+  { desc = '[S]earch current [W]ord' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>sg',
+  require('telescope.builtin').live_grep,
+  { desc = '[S]earch by [G]rep' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>sd',
+  require('telescope.builtin').diagnostics,
+  { desc = '[S]earch [D]iagnostics' }
+)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
-    'typescript', 'html', 'css', 'json', 'help' },
+  ensure_installed = {
+    'c',
+    'cpp',
+    'go',
+    'lua',
+    'python',
+    'rust',
+    'toml',
+    'typescript',
+    'html',
+    'css',
+    'json',
+    'help',
+  },
   autotag = { enable = true },
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -352,7 +415,7 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -384,8 +447,16 @@ local on_attach = function(_, bufnr)
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap(
+    '<leader>ds',
+    require('telescope.builtin').lsp_document_symbols,
+    '[D]ocument [S]ymbols'
+  )
+  nmap(
+    '<leader>ws',
+    require('telescope.builtin').lsp_dynamic_workspace_symbols,
+    '[W]orkspace [S]ymbols'
+  )
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -404,7 +475,6 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
-
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -437,43 +507,43 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 require('mason').setup()
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+local mason_lspconfig = require('mason-lspconfig')
 
-mason_lspconfig.setup {
+mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
-}
+})
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
   function(server_name)
-    require('lspconfig')[server_name].setup {
+    require('lspconfig')[server_name].setup({
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
-    }
+    })
   end,
-}
+})
 
 -- Turn on lsp status information
 require('fidget').setup()
 
 -- nvim-cmp setup
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-  mapping = cmp.mapping.preset.insert {
+  mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    },
+    }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -492,12 +562,12 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
-  },
+  }),
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
-}
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
@@ -505,63 +575,63 @@ cmp.setup {
 local map = vim.api.nvim_set_keymap
 
 -- Better copy and paste
-map('n', '<leader>p', '"+p', {noremap = true, silent = false})
-map('v', '<leader>p', '"+p', {noremap = true, silent = false})
-map('n', '<leader>P', '"+P', {noremap = true, silent = false})
-map('v', '<leader>P', '"+P', {noremap = true, silent = false})
-map('n', '<leader>y', '"+y', {noremap = true, silent = false})
-map('v', '<leader>y', '"+y', {noremap = true, silent = false})
-map('n', '<leader>Y', '"+y$', {noremap = true, silent = false})
+map('n', '<leader>p', '"+p', { noremap = true, silent = false })
+map('v', '<leader>p', '"+p', { noremap = true, silent = false })
+map('n', '<leader>P', '"+P', { noremap = true, silent = false })
+map('v', '<leader>P', '"+P', { noremap = true, silent = false })
+map('n', '<leader>y', '"+y', { noremap = true, silent = false })
+map('v', '<leader>y', '"+y', { noremap = true, silent = false })
+map('n', '<leader>Y', '"+y$', { noremap = true, silent = false })
 
 -- Smart way to move between windows
-map('n', '<C-h>', '<C-W>h', {noremap = true, silent = false})
-map('n', '<C-j>', '<C-W>j', {noremap = true, silent = false})
-map('n', '<C-k>', '<C-W>k', {noremap = true, silent = false})
-map('n', '<C-l>', '<C-W>l', {noremap = true, silent = false})
+map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })
+map('n', '<C-j>', '<C-W>j', { noremap = true, silent = false })
+map('n', '<C-k>', '<C-W>k', { noremap = true, silent = false })
+map('n', '<C-l>', '<C-W>l', { noremap = true, silent = false })
 
-map('n', '<leader>h', '<C-W>h', {noremap = true, silent = false})
-map('n', '<leader>j', '<C-W>j', {noremap = true, silent = false})
-map('n', '<leader>k', '<C-W>k', {noremap = true, silent = false})
-map('n', '<leader>l', '<C-W>l', {noremap = true, silent = false})
+map('n', '<leader>h', '<C-W>h', { noremap = true, silent = false })
+map('n', '<leader>j', '<C-W>j', { noremap = true, silent = false })
+map('n', '<leader>k', '<C-W>k', { noremap = true, silent = false })
+map('n', '<leader>l', '<C-W>l', { noremap = true, silent = false })
 
 -- Resizing
-map('n', '<A-l>', ':vertical resize +20<CR>', {noremap = true, silent = true})
-map('n', '<A-h>', ':vertical resize -20<CR>', {noremap = true, silent = true})
-map('n', '<A-k>', ':resize +20<CR>', {noremap = true, silent = true})
-map('n', '<A-j>', ':resize -20<CR>', {noremap = true, silent = true})
+map('n', '<A-l>', ':vertical resize +20<CR>', { noremap = true, silent = true })
+map('n', '<A-h>', ':vertical resize -20<CR>', { noremap = true, silent = true })
+map('n', '<A-k>', ':resize +20<CR>', { noremap = true, silent = true })
+map('n', '<A-j>', ':resize -20<CR>', { noremap = true, silent = true })
 
 -- Netrw
-map('n' ,'<leader>ee' ,':Explore<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>eh' ,':Hexplore<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>ev' ,':Vexplore<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>es' ,':Sexplore<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>et' ,':Texplore<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>el' ,':Lexplore<CR>', {noremap = true, silent = false})
+map('n', '<leader>ee', ':Explore<CR>', { noremap = true, silent = false })
+map('n', '<leader>eh', ':Hexplore<CR>', { noremap = true, silent = false })
+map('n', '<leader>ev', ':Vexplore<CR>', { noremap = true, silent = false })
+map('n', '<leader>es', ':Sexplore<CR>', { noremap = true, silent = false })
+map('n', '<leader>et', ':Texplore<CR>', { noremap = true, silent = false })
+map('n', '<leader>el', ':Lexplore<CR>', { noremap = true, silent = false })
 
 -- Neovim Buffers
-map('n' ,'<leader>bd' ,':bd<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>bw' ,':bw<CR>', {noremap = true, silent = false})
+map('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = false })
+map('n', '<leader>bw', ':bw<CR>', { noremap = true, silent = false })
 
 -- Fast Save
-map('n' ,'<leader>ww' ,':w<CR>', {noremap = true, silent = false})
+map('n', '<leader>ww', ':w<CR>', { noremap = true, silent = false })
 
--- Tabs 
+-- Tabs
 -- Go to tab by number
-map('n' ,'<leader>1' ,'1gt', {noremap = true, silent = false})
-map('n' ,'<leader>2' ,'2gt', {noremap = true, silent = false})
-map('n' ,'<leader>3' ,'3gt', {noremap = true, silent = false})
-map('n' ,'<leader>4' ,'4gt', {noremap = true, silent = false})
-map('n' ,'<leader>5' ,'5gt', {noremap = true, silent = false})
-map('n' ,'<leader>6' ,'6gt', {noremap = true, silent = false})
-map('n' ,'<leader>7' ,'7gt', {noremap = true, silent = false})
-map('n' ,'<leader>8' ,'8gt', {noremap = true, silent = false})
-map('n' ,'<leader>9' ,'9gt', {noremap = true, silent = false})
-map('n' ,'<leader>0' ,':tablast<CR>', {noremap = true, silent = false})
+map('n', '<leader>1', '1gt', { noremap = true, silent = false })
+map('n', '<leader>2', '2gt', { noremap = true, silent = false })
+map('n', '<leader>3', '3gt', { noremap = true, silent = false })
+map('n', '<leader>4', '4gt', { noremap = true, silent = false })
+map('n', '<leader>5', '5gt', { noremap = true, silent = false })
+map('n', '<leader>6', '6gt', { noremap = true, silent = false })
+map('n', '<leader>7', '7gt', { noremap = true, silent = false })
+map('n', '<leader>8', '8gt', { noremap = true, silent = false })
+map('n', '<leader>9', '9gt', { noremap = true, silent = false })
+map('n', '<leader>0', ':tablast<CR>', { noremap = true, silent = false })
 
-map('n' ,'<leader>tn' ,':$tabnew<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>tt' ,':$tab split<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>tc' ,':tabclose<CR>', {noremap = true, silent = false})
-map('n' ,'<leader>to' ,':tabonly<CR>', {noremap = true, silent = false})
+map('n', '<leader>tn', ':$tabnew<CR>', { noremap = true, silent = false })
+map('n', '<leader>tt', ':$tab split<CR>', { noremap = true, silent = false })
+map('n', '<leader>tc', ':tabclose<CR>', { noremap = true, silent = false })
+map('n', '<leader>to', ':tabonly<CR>', { noremap = true, silent = false })
 
 -- Debugging
 -- For C/C++/Rust use CodeLLDB
@@ -571,65 +641,111 @@ let g:vimspector_sidebar_width = 85
 let g:vimspector_bottombar_height = 15
 let g:vimspector_terminal_maxwidth = 70
 ]])
-map('n', "<leader>dl", ":call vimspector#Launch()<cr>", {noremap = true, silent = false})
-map('n', "<leader>dr", ":call vimspector#Reset()<cr>", {noremap = true, silent = false})
-map('n', "<leader>do", ":call vimspector#StepOver()<cr>", {noremap = true, silent = false})
-map('n', "<leader>dt", ":call vimspector#StepOut()<cr>", {noremap = true, silent = false})
-map('n', "<leader>di", ":call vimspector#StepInto()<cr>", {noremap = true, silent = false})
-map('n', "<leader>db", ":call vimspector#ToggleBreakpoint()<cr>", {noremap = true, silent = false})
-map('n', "<leader>dw", ":call vimspector#AddWatch()<cr>", {noremap = true, silent = false})
-map('n', "<leader>de", ":call vimspector#Evaluate()<cr>", {noremap = true, silent = false})
+map(
+  'n',
+  '<leader>dl',
+  ':call vimspector#Launch()<cr>',
+  { noremap = true, silent = false }
+)
+map('n', '<leader>dr', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
+map(
+  'n',
+  '<leader>do',
+  ':call vimspector#StepOver()<cr>',
+  { noremap = true, silent = false }
+)
+map(
+  'n',
+  '<leader>dt',
+  ':call vimspector#StepOut()<cr>',
+  { noremap = true, silent = false }
+)
+map(
+  'n',
+  '<leader>di',
+  ':call vimspector#StepInto()<cr>',
+  { noremap = true, silent = false }
+)
+map(
+  'n',
+  '<leader>db',
+  ':call vimspector#ToggleBreakpoint()<cr>',
+  { noremap = true, silent = false }
+)
+map(
+  'n',
+  '<leader>dw',
+  ':call vimspector#AddWatch()<cr>',
+  { noremap = true, silent = false }
+)
+map(
+  'n',
+  '<leader>de',
+  ':call vimspector#Evaluate()<cr>',
+  { noremap = true, silent = false }
+)
 
 -- Fugitive Git bindings
-map('n', "<leader>ga", ":Git add %:p<CR><CR>", {noremap = true, silent = false})
+map('n', '<leader>ga', ':Git add %:p<CR><CR>', { noremap = true, silent = false })
 
--- AutoPairs 
-local status, autopairs = pcall(require, "nvim-autopairs")
-if (not status) then return end
+-- AutoPairs
+local status, autopairs = pcall(require, 'nvim-autopairs')
+if not status then
+  return
+end
 
 autopairs.setup({
-  disable_filetype = { "TelescopePrompt" , "vim" },
+  disable_filetype = { 'TelescopePrompt', 'vim' },
 })
 
 -- CoPilot
-cmp.event:on("menu_opened", function()
+cmp.event:on('menu_opened', function()
   vim.b.copilot_suggestion_hidden = true
 end)
 
-cmp.event:on("menu_closed", function()
+cmp.event:on('menu_closed', function()
   vim.b.copilot_suggestion_hidden = false
 end)
 
-map('n', "<leader>cp", ":Copilot panel<CR>", {noremap = true, silent = false})
+map('n', '<leader>cp', ':Copilot panel<CR>', { noremap = true, silent = false })
 
 -- fugitive remaps
-map('n', "<leader>G", ":G<CR>", {noremap = true, silent = false})
-map('n', "<leader>gd", ":Gdiff<CR>", {noremap = true, silent = false})
-map('n', "<leader>gl", ":Git log<CR>", {noremap = true, silent = false})
-map('n', "<leader>gb", ":Git blame<CR>", {noremap = true, silent = false})
-map('n', "<leader>gC", ":Git commit -v<CR>", {noremap = true, silent = false})
-map('n', "<leader>gS", ":Git status<CR>", {noremap = true, silent = false})
-map('n', "<leader>gD", ":Gvdiffsplit<CR>", {noremap = true, silent = false})
-map('n', "<leader>gP", ":Git push<CR>", {noremap = true, silent = false})
-map('n', "<leader>gp", ":Git pull<CR>", {noremap = true, silent = false})
+map('n', '<leader>G', ':G<CR>', { noremap = true, silent = false })
+map('n', '<leader>gd', ':Gdiff<CR>', { noremap = true, silent = false })
+map('n', '<leader>gl', ':Git log<CR>', { noremap = true, silent = false })
+map('n', '<leader>gb', ':Git blame<CR>', { noremap = true, silent = false })
+map('n', '<leader>gC', ':Git commit -v<CR>', { noremap = true, silent = false })
+map('n', '<leader>gS', ':Git status<CR>', { noremap = true, silent = false })
+map('n', '<leader>gD', ':Gvdiffsplit<CR>', { noremap = true, silent = false })
+map('n', '<leader>gP', ':Git push<CR>', { noremap = true, silent = false })
+map('n', '<leader>gp', ':Git pull<CR>', { noremap = true, silent = false })
 
 -- Workspace remaps
-map('n', "<leader>wc", ":pwd<CR>", { desc="[W]orkspace [C]urrent", noremap = true, silent = false})
-map('n', "<leader>wd", ":cd %:p:h<CR>:pwd<CR>", { desc="[W]orkspace [D]irectory", noremap = true, silent = false })
-map('n', "<leader>wh", ":cd <CR>:pwd<CR>", {noremap = true, silent = false})
-
+map(
+  'n',
+  '<leader>wc',
+  ':pwd<CR>',
+  { desc = '[W]orkspace [C]urrent', noremap = true, silent = false }
+)
+map(
+  'n',
+  '<leader>wd',
+  ':cd %:p:h<CR>:pwd<CR>',
+  { desc = '[W]orkspace [D]irectory', noremap = true, silent = false }
+)
+map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
 
 -- Installs linters for these languages.
 -- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
 --     'typescript', 'html', 'css', 'json', 'help' },
 -- Linters
 require('lint').linters_by_ft = {
-  markdown = {'vale',},
-  typescript = {'eslint_d',}
+  markdown = { 'vale' },
+  typescript = { 'eslint_d' },
 }
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   callback = function()
-    require("lint").try_lint()
+    require('lint').try_lint()
   end,
 })
 
@@ -639,7 +755,6 @@ local has_formatter, formatter = pcall(require, 'formatter')
 if not has_formatter then
   return
 end
-
 
 local M = {}
 
@@ -664,35 +779,32 @@ end
 
 function M.augroup(group, fn)
   vim.api.nvim_command('augroup ' .. group)
-  vim.api.nvim_command 'autocmd!'
+  vim.api.nvim_command('autocmd!')
   fn()
-  vim.api.nvim_command 'augroup END'
+  vim.api.nvim_command('augroup END')
 end
-
-
 
 local function prettier()
   return {
     exe = 'prettier',
-    -- args = {
-    --   '--config-precedence',
-    --   'prefer-file',
-    --   '--single-quote',
-    --   '--no-bracket-spacing',
-    --   '--prose-wrap',
-    --   'always',
-    --   '--arrow-parens',
-    --   'always',
-    --   '--trailing-comma',
-    --   'all',
-    --   '--no-semi',
-    --   '--end-of-line',
-    --   'lf',
-    --   '--print-width',
-    --   vim.bo.textwidth,
-    --   '--stdin-filepath',
-    --   vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
-    -- },
+    args = {
+      '--config-precedence',
+      'prefer-file',
+      '--single-quote',
+      '--prose-wrap',
+      'always',
+      '--arrow-parens',
+      'always',
+      '--trailing-comma',
+      'all',
+      '--no-semi',
+      '--end-of-line',
+      'lf',
+      '--print-width',
+      80,
+      '--stdin-filepath',
+      vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
+    },
     stdin = true,
   }
 end
@@ -709,7 +821,7 @@ end
 --   M.autocmd('BufWritePre', '*', 'FormatWrite')
 -- end)
 
-formatter.setup {
+formatter.setup({
   logging = false,
   filetype = {
     javascript = { prettier },
@@ -786,7 +898,7 @@ formatter.setup {
             '--indent-width',
             vim.bo.tabstop,
             '--column-width',
-            vim.bo.textwidth,
+            80,
             '-',
           },
           stdin = true,
@@ -794,7 +906,7 @@ formatter.setup {
       end,
     },
   },
-}
+})
 
 -- To Do
 --------
@@ -802,4 +914,3 @@ formatter.setup {
 -- Tmux
 -- Investigate how doable Neovim can be for Java
 -- Set up LuaSnip snippets
-
