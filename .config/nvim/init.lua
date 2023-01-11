@@ -914,7 +914,10 @@ formatter.setup({
 
 -- To Do
 --------
--- vimspector for TypeScript, Go -- Get better at debugging!
--- Tmux
--- Investigate how doable Neovim can be for Java
--- Set up LuaSnip snippets
+-- Tmux multiplexer 
+-- Test runner https://github.com/vim-test/vim-test -> https://github.com/tpope/vim-dispatch
+-- Get better at debugging in vimspector
+-- Finish setting up fugitive
+-- gh.nvim
+-- More comprehensize snippets in luasnip
+-- Decompose init.lua into individual plugins
