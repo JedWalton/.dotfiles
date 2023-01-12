@@ -129,6 +129,21 @@ require('packer').startup(function(use)
 
   require('packer').use({ 'mhartington/formatter.nvim' })
 
+  -- Packer
+  use({
+    "jackMort/ChatGPT.nvim",
+      config = function()
+        require("chatgpt").setup({
+          -- optional configuration
+        })
+      end,
+      requires = {
+        "MunifTanjim/nui.nvim",
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim"
+      }
+  })
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -737,6 +752,13 @@ map(
   { desc = '[W]orkspace [D]irectory', noremap = true, silent = false }
 )
 map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
+
+
+-- ChatGPT
+-- export OPENAI_API_KEY = <ChatGPT/OPENAI_KEY>
+map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
+map('n', '<leader>aa', ':ChatGPTActAs<CR>', { noremap = true, silent = false })
+
 
 -- Install linters for these languages.
 -- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
