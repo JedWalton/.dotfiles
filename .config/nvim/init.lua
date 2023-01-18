@@ -602,10 +602,12 @@ map('v', '<leader>y', '"+y', { noremap = true, silent = false })
 map('n', '<leader>Y', '"+y$', { noremap = true, silent = false })
 
 -- Smart way to move between windows
-map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })
-map('n', '<C-j>', '<C-W>j', { noremap = true, silent = false })
-map('n', '<C-k>', '<C-W>k', { noremap = true, silent = false })
-map('n', '<C-l>', '<C-W>l', { noremap = true, silent = false })
+
+-- TMUX overrides these beautiful remaps. To the future
+-- map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })
+-- map('n', '<C-j>', '<C-W>j', { noremap = true, silent = false })
+-- map('n', '<C-k>', '<C-W>k', { noremap = true, silent = false })
+-- map('n', '<C-l>', '<C-W>l', { noremap = true, silent = false })
 
 map('n', '<leader>h', '<C-W>h', { noremap = true, silent = false })
 map('n', '<leader>j', '<C-W>j', { noremap = true, silent = false })
