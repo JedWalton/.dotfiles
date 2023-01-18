@@ -365,6 +365,7 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'c',
     'cpp',
+    'vim',
     'go',
     'lua',
     'python',
@@ -702,8 +703,6 @@ map(
   { noremap = true, silent = false }
 )
 
--- Fugitive Git bindings
-map('n', '<leader>ga', ':Git add %:p<CR><CR>', { noremap = true, silent = false })
 
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
@@ -729,6 +728,7 @@ map('n', '<leader>cp', ':Copilot panel<CR>', { noremap = true, silent = false })
 
 -- fugitive remaps
 map('n', '<leader>G', ':G<CR>', { noremap = true, silent = false })
+map('n', '<leader>ga', ':Git add %:p<CR><CR>', { noremap = true, silent = false })
 map('n', '<leader>gd', ':Gdiff<CR>', { noremap = true, silent = false })
 map('n', '<leader>gl', ':Git log<CR>', { noremap = true, silent = false })
 map('n', '<leader>gb', ':Git blame<CR>', { noremap = true, silent = false })
@@ -758,6 +758,7 @@ map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
 -- export OPENAI_API_KEY = <ChatGPT/OPENAI_KEY>
 map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
 map('n', '<leader>aa', ':ChatGPTActAs<CR>', { noremap = true, silent = false })
+map('n', '<leader>ae', ':ChatGPTEditWithInstructions<CR>', { noremap = true, silent = false })
 
 
 -- Install linters for these languages.
