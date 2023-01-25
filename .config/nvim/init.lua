@@ -144,6 +144,12 @@ require('packer').startup(function(use)
       }
   })
 
+  -- tmux
+  use({
+    "aserowy/tmux.nvim",
+    config = function() return require("tmux").setup() end
+  })
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -226,6 +232,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
 vim.opt.colorcolumn = '80'
+vim.opt.background= 'dark'
 
 vim.opt.cmdheight = 1
 
@@ -602,12 +609,10 @@ map('v', '<leader>y', '"+y', { noremap = true, silent = false })
 map('n', '<leader>Y', '"+y$', { noremap = true, silent = false })
 
 -- Smart way to move between windows
-
--- TMUX overrides these beautiful remaps. To the future
--- map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })
--- map('n', '<C-j>', '<C-W>j', { noremap = true, silent = false })
--- map('n', '<C-k>', '<C-W>k', { noremap = true, silent = false })
--- map('n', '<C-l>', '<C-W>l', { noremap = true, silent = false })
+map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })
+map('n', '<C-j>', '<C-W>j', { noremap = true, silent = false })
+map('n', '<C-k>', '<C-W>k', { noremap = true, silent = false })
+map('n', '<C-l>', '<C-W>l', { noremap = true, silent = false })
 
 map('n', '<leader>h', '<C-W>h', { noremap = true, silent = false })
 map('n', '<leader>j', '<C-W>j', { noremap = true, silent = false })
