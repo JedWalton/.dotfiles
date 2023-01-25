@@ -742,8 +742,8 @@ map('n', '<leader>gb', ':Git blame<CR>', { noremap = true, silent = false })
 map('n', '<leader>gC', ':Git commit -v<CR>', { noremap = true, silent = false })
 map('n', '<leader>gS', ':Git status<CR>', { noremap = true, silent = false })
 map('n', '<leader>gD', ':Gvdiffsplit<CR>', { noremap = true, silent = false })
-map('n', '<leader>gP', ':Git push<CR>', { noremap = true, silent = false })
-map('n', '<leader>gp', ':Git pull<CR>', { noremap = true, silent = false })
+map('n', '<leader>gp', ':Git push<CR>', { noremap = true, silent = false })
+map('n', '<leader>gP', ':Git pull<CR>', { noremap = true, silent = false })
 
 -- Workspace remaps
 map(
