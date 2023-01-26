@@ -626,12 +626,7 @@ map('n', '<A-k>', ':resize +20<CR>', { noremap = true, silent = true })
 map('n', '<A-j>', ':resize -20<CR>', { noremap = true, silent = true })
 
 -- Netrw
-map('n', '<leader>ee', ':Explore<CR>', { noremap = true, silent = false })
-map('n', '<leader>eh', ':Hexplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>ev', ':Vexplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>es', ':Sexplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>et', ':Texplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>el', ':Lexplore<CR>', { noremap = true, silent = false })
+map('n', '<leader>e', ':Explore<CR>', { noremap = true, silent = false })
 
 -- Neovim Buffers
 map('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = false })
