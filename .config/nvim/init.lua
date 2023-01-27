@@ -159,6 +159,11 @@ require('packer').startup(function(use)
   if is_bootstrap then
     require('packer').sync()
   end
+
+
+  -- nice transparency
+  use('xiyaowong/nvim-transparent')
+
 end)
 
 -- When we are bootstrapping a configuration, it doesn't
@@ -208,6 +213,7 @@ vim.o.updatetime = 250
 vim.o.termguicolors = true
 -- vim.o.background = "light" -- --[[ o ]]r "light" for light mode
 vim.cmd([[colorscheme tokyonight-storm]])
+
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
