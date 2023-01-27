@@ -203,8 +203,33 @@ bindsym $mod+Ctrl+j resize grow height 1 px or 1 ppt
 bindsym $mod+Ctrl+k resize shrink height 1 px or 1 ppt
 bindsym $mod+Ctrl+l resize grow width 1 px or 1 ppt
 
+# responsiveness 
 exec "xset r rate 225 70"
 
+# keymap
 exec "setxkbmap -layout 'us' -variant 'dvorak' -option ctrl:swapcaps altwin:swap_alt_win"
+
+# wallpaper
+exec "feh --bg-scale ~/Pictures/cube.png"
+
+# for transparency
+exec --no-startup-id compton
+
+
+# use workspaces on different monitors
+workspace "1: P1" output HDMI-1 
+workspace "2: P2" output HDMI-1
+workspace "3: P3" output HDMI-1
+workspace "4: P4" output HDMI-1
+workspace "5: P5" output eDP-1
+workspace "6: S1" output HDMI-1
+workspace "7: S2" output HDMI-1
+workspace "8: S3" output HDMI-1
+workspace "9: S4" output HDMI-1
+workspace "10: S5" output HDMI-1
+
+# add HDMI monitor when connected
+exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1
+bindsym $mod+x exec --no-startup-id xrandr --output HDMI-1 --auto --right-of eDP-1
 
 
