@@ -144,6 +144,12 @@ require('packer').startup(function(use)
       }
   })
 
+  -- tmux
+  use({
+    "aserowy/tmux.nvim",
+    config = function() return require("tmux").setup() end
+  })
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -226,6 +232,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
 vim.opt.colorcolumn = '80'
+vim.opt.background= 'dark'
 
 vim.opt.cmdheight = 1
 
@@ -365,6 +372,7 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'c',
     'cpp',
+    'vim',
     'go',
     'lua',
     'python',
@@ -618,12 +626,7 @@ map('n', '<A-k>', ':resize +20<CR>', { noremap = true, silent = true })
 map('n', '<A-j>', ':resize -20<CR>', { noremap = true, silent = true })
 
 -- Netrw
-map('n', '<leader>ee', ':Explore<CR>', { noremap = true, silent = false })
-map('n', '<leader>eh', ':Hexplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>ev', ':Vexplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>es', ':Sexplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>et', ':Texplore<CR>', { noremap = true, silent = false })
-map('n', '<leader>el', ':Lexplore<CR>', { noremap = true, silent = false })
+map('n', '<leader>e', ':Explore<CR>', { noremap = true, silent = false })
 
 -- Neovim Buffers
 map('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = false })
@@ -702,8 +705,6 @@ map(
   { noremap = true, silent = false }
 )
 
--- Fugitive Git bindings
-map('n', '<leader>ga', ':Git add %:p<CR><CR>', { noremap = true, silent = false })
 
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
@@ -729,14 +730,15 @@ map('n', '<leader>cp', ':Copilot panel<CR>', { noremap = true, silent = false })
 
 -- fugitive remaps
 map('n', '<leader>G', ':G<CR>', { noremap = true, silent = false })
+map('n', '<leader>ga', ':Git add %:p<CR><CR>', { noremap = true, silent = false })
 map('n', '<leader>gd', ':Gdiff<CR>', { noremap = true, silent = false })
 map('n', '<leader>gl', ':Git log<CR>', { noremap = true, silent = false })
 map('n', '<leader>gb', ':Git blame<CR>', { noremap = true, silent = false })
 map('n', '<leader>gC', ':Git commit -v<CR>', { noremap = true, silent = false })
 map('n', '<leader>gS', ':Git status<CR>', { noremap = true, silent = false })
 map('n', '<leader>gD', ':Gvdiffsplit<CR>', { noremap = true, silent = false })
-map('n', '<leader>gP', ':Git push<CR>', { noremap = true, silent = false })
-map('n', '<leader>gp', ':Git pull<CR>', { noremap = true, silent = false })
+map('n', '<leader>gp', ':Git push<CR>', { noremap = true, silent = false })
+map('n', '<leader>gP', ':Git pull<CR>', { noremap = true, silent = false })
 
 -- Workspace remaps
 map(
@@ -758,6 +760,7 @@ map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
 -- export OPENAI_API_KEY = <ChatGPT/OPENAI_KEY>
 map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
 map('n', '<leader>aa', ':ChatGPTActAs<CR>', { noremap = true, silent = false })
+map('n', '<leader>ae', ':ChatGPTEditWithInstructions<CR>', { noremap = true, silent = false })
 
 
 -- Install linters for these languages.
