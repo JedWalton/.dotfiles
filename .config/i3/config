@@ -175,18 +175,14 @@ bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/resolution
 
 # FKeys
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-#
+bindsym $mod+semicolon exec pactl set-sink-mute @DEFAULT_SINK@ toggle # Mute
+bindsym $mod+period exec pactl set-sink-volume @DEFAULT_SINK@ -5%  # Up
+bindsym $mod+comma exec pactl set-sink-volume @DEFAULT_SINK@ +5%  # Down
+
 # # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-# Alsa audio controls.
-bindsym $mod+Shift+comma exec ~/.config/i3/scripts/alsa restore
-bindsym $mod+semicolon exec ~/.config/i3/scripts/alsa down Headphone
-bindsym $mod+comma exec ~/.config/i3/scripts/alsa up Headphone
 bindsym $mod+m move workspace to output left
 
 # Suspend
@@ -217,16 +213,16 @@ exec --no-startup-id compton
 
 
 # use workspaces on different monitors
-workspace "1: P1" output HDMI-1 
-workspace "2: P2" output HDMI-1
-workspace "3: P3" output HDMI-1
-workspace "4: P4" output HDMI-1
-workspace "5: P5" output eDP-1
-workspace "6: S1" output HDMI-1
-workspace "7: S2" output HDMI-1
-workspace "8: S3" output HDMI-1
-workspace "9: S4" output HDMI-1
-workspace "10: S5" output HDMI-1
+workspace "1" output HDMI-1 
+workspace "2" output HDMI-1
+workspace "3" output HDMI-1
+workspace "4" output HDMI-1
+workspace "5" output eDP-1
+workspace "6" output HDMI-1
+workspace "7" output HDMI-1
+workspace "8" output HDMI-1
+workspace "9" output HDMI-1
+workspace "10" output HDMI-1
 
 # add HDMI monitor when connected
 exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1
