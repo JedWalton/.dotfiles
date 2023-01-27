@@ -213,6 +213,15 @@ vim.o.updatetime = 250
 vim.o.termguicolors = true
 -- vim.o.background = "light" -- --[[ o ]]r "light" for light mode
 vim.cmd([[colorscheme tokyonight-storm]])
+-- nice transparency
+require("transparent").setup({
+  enable = true, -- boolean: enable transparent
+  extra_groups = { -- table/string: additional groups that should be cleared
+    -- In particular, when you set it to 'all', that means all available groups
+    'all'
+  },
+  exclude = {}, -- table: groups you don't want to clear
+})
 
 
 -- Set completeopt to have a better completion experience
