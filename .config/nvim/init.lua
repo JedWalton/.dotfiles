@@ -444,9 +444,9 @@ local on_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, '[W]orkspace [L]ist Folders')
+  nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('<leader>Wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -586,7 +586,7 @@ map('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = false })
 map('n', '<leader>bw', ':bw<CR>', { noremap = true, silent = false })
 
 -- Fast Save
-map('n', '<leader>W', ':w<CR>', { noremap = true, silent = false })
+map('n', '<leader>w', ':w<CR>', { noremap = true, silent = false })
 
 -- Tabs
 -- Go to tab by number
@@ -614,13 +614,16 @@ let g:vimspector_bottombar_height = 15
 let g:vimspector_terminal_maxwidth = 70
 ]])
 map('n', '<leader>dl', ':call vimspector#Launch()<cr>', { noremap = true, silent = false })
-map('n', '<leader>dr', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
 map('n', '<leader>do', ':call vimspector#StepOver()<cr>',{ noremap = true, silent = false })
 map('n', '<leader>dt', ':call vimspector#StepOut()<cr>',{ noremap = true, silent = false })
 map('n', '<leader>di', ':call vimspector#StepInto()<cr>',{ noremap = true, silent = false })
 map('n', '<leader>db', ':call vimspector#ToggleBreakpoint()<cr>',{ noremap = true, silent = false })
 map('n', '<leader>dw', ':call vimspector#AddWatch()<cr>',{ noremap = true, silent = false })
 map('n', '<leader>de', ':call vimspector#Evaluate()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>ds', ':call vimspector#Stop()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dR', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
+map('n', '<leader>dr', ':call vimspector#Restart()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dc', ':call vimspector#ClearBreakpoints()<cr>',{ noremap = true, silent = false })
 
 -- Refactoring
 -- Remaps for the refactoring operations currently offered by the plugin
