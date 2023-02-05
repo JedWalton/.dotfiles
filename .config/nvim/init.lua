@@ -149,6 +149,14 @@ require('packer').startup(function(use)
     "aserowy/tmux.nvim",
     config = function() return require("tmux").setup() end
   })
+  
+  use {
+    "ThePrimeagen/refactoring.nvim",
+      requires = {
+          {"nvim-lua/plenary.nvim"},
+          {"nvim-treesitter/nvim-treesitter"}
+      }
+  }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -677,50 +685,28 @@ let g:vimspector_sidebar_width = 85
 let g:vimspector_bottombar_height = 15
 let g:vimspector_terminal_maxwidth = 70
 ]])
-map(
-  'n',
-  '<leader>dl',
-  ':call vimspector#Launch()<cr>',
-  { noremap = true, silent = false }
-)
+map('n', '<leader>dl', ':call vimspector#Launch()<cr>', { noremap = true, silent = false })
 map('n', '<leader>dr', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
-map(
-  'n',
-  '<leader>do',
-  ':call vimspector#StepOver()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>dt',
-  ':call vimspector#StepOut()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>di',
-  ':call vimspector#StepInto()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>db',
-  ':call vimspector#ToggleBreakpoint()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>dw',
-  ':call vimspector#AddWatch()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>de',
-  ':call vimspector#Evaluate()<cr>',
-  { noremap = true, silent = false }
-)
+map('n', '<leader>do', ':call vimspector#StepOver()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dt', ':call vimspector#StepOut()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>di', ':call vimspector#StepInto()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>db', ':call vimspector#ToggleBreakpoint()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dw', ':call vimspector#AddWatch()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>de', ':call vimspector#Evaluate()<cr>',{ noremap = true, silent = false })
 
+-- Refactoring
+-- Remaps for the refactoring operations currently offered by the plugin
+vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+
+-- Extract block doesn't need visual mode
+vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
+
+-- Inline variable can also pick up the identifier currently under the cursor without visual mode
+vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
 
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
@@ -776,8 +762,6 @@ map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
 -- export OPENAI_API_KEY = <ChatGPT/OPENAI_KEY>
 map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
 map('n', '<leader>aa', ':ChatGPTActAs<CR>', { noremap = true, silent = false })
-map('n', '<leader>ae', ':ChatGPTEditWithInstructions<CR>', { noremap = true, silent = false })
-
 
 -- Install linters for these languages.
 -- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
