@@ -25,10 +25,8 @@ require('packer').startup(function(use)
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-
       -- Useful status updates for LSP
       'j-hui/fidget.nvim',
-
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
@@ -150,6 +148,55 @@ require('packer').startup(function(use)
     config = function() return require("tmux").setup() end
   })
 
+  use {
+    "ThePrimeagen/refactoring.nvim",
+      requires = {
+          {"nvim-lua/plenary.nvim"},
+          {"nvim-treesitter/nvim-treesitter"}
+      }
+  }
+
+  use {
+    "rest-nvim/rest.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("rest-nvim").setup({
+        -- Open request results in a horizontal split
+        result_split_horizontal = false,
+        -- Keep the http file buffer above|left when split horizontal|vertical
+        result_split_in_place = false,
+        -- Skip SSL verification, useful for unknown certificates
+        skip_ssl_verification = false,
+        -- Encode URL before making request
+        encode_url = true,
+        -- Highlight request on run
+        highlight = {
+          enabled = true,
+          timeout = 150,
+        },
+        result = {
+          -- toggle showing URL, HTTP info, headers at top the of result window
+          show_url = true,
+          show_http_info = true,
+          show_headers = true,
+          -- executables or functions for formatting response body [optional]
+          -- set them to false if you want to disable them
+          formatters = {
+            json = "jq",
+            html = function(body)
+              return vim.fn.system({"tidy", "-i", "-q", "-"}, body)
+            end
+          },
+        },
+        -- Jump to request line on run
+        jump_to_request = false,
+        env_file = '.env',
+        custom_dynamic_variables = {},
+        yank_dry_run = true,
+      })
+    end
+  }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -190,27 +237,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Make line numbers default
-vim.wo.number = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Decrease update time
-vim.o.updatetime = 250
-
 -- Set colorscheme
-vim.o.termguicolors = true
 -- vim.o.background = "light" -- --[[ o ]]r "light" for light mode
 vim.cmd([[colorscheme tokyonight-storm]])
 -- nice transparency
@@ -226,8 +253,10 @@ require("transparent").setup({
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
-
 vim.opt.nu = true
+vim.wo.number = true
+vim.o.mouse = 'a'
+vim.o.breakindent = true
 vim.opt.relativenumber = true
 vim.opt.errorbells = false
 vim.opt.tabstop = 2
@@ -248,8 +277,11 @@ vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
 vim.opt.colorcolumn = '80'
 vim.opt.background= 'dark'
-
 vim.opt.cmdheight = 1
+-- Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.updatetime = 250
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
@@ -280,26 +312,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Set lualine as statusline
 -- See `:help lualine.txt`
 require('lualine').setup({
-  options = {
-    icons_enabled = false,
-    theme = 'tokyonight',
-    component_separators = '|',
-    section_separators = '',
+  options = { icons_enabled = false, theme = 'tokyonight', component_separators = '|', section_separators = '',
   },
 })
 
--- Enable Comment.nvim
 require('Comment').setup()
 
--- Enable `lukas-reineke/indent-blankline.nvim`
--- See `:help indent_blankline.txt`
 require('indent_blankline').setup({
-  char = '┊',
+  -- char = '┊',
+  char = '', -- See `:help indent_blankline.txt`
   show_trailing_blankline_indent = false,
 })
 
--- Gitsigns
--- See `:help gitsigns.txt`
 require('gitsigns').setup({
   signs = {
     add = { text = '+' },
@@ -327,18 +351,8 @@ require('telescope').setup({
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set(
-  'n',
-  '<leader>?',
-  require('telescope.builtin').oldfiles,
-  { desc = '[?] Find recently opened files' }
-)
-vim.keymap.set(
-  'n',
-  '<leader><space>',
-  require('telescope.builtin').buffers,
-  { desc = '[ ] Find existing buffers' }
-)
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(
@@ -349,36 +363,11 @@ vim.keymap.set('n', '<leader>/', function()
   )
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
-vim.keymap.set(
-  'n',
-  '<leader>sf',
-  require('telescope.builtin').find_files,
-  { desc = '[S]earch [F]iles' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>sh',
-  require('telescope.builtin').help_tags,
-  { desc = '[S]earch [H]elp' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>sw',
-  require('telescope.builtin').grep_string,
-  { desc = '[S]earch current [W]ord' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>sg',
-  require('telescope.builtin').live_grep,
-  { desc = '[S]earch by [G]rep' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>sd',
-  require('telescope.builtin').diagnostics,
-  { desc = '[S]earch [D]iagnostics' }
-)
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -397,6 +386,7 @@ require('nvim-treesitter.configs').setup({
     'html',
     'css',
     'json',
+    'http',
     'help',
   },
   autotag = { enable = true },
@@ -460,8 +450,8 @@ require('nvim-treesitter.configs').setup({
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>dof', vim.diagnostic.open_float)
+vim.keymap.set('n', '<leader>dsl', vim.diagnostic.setloclist)
 
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
@@ -487,16 +477,8 @@ local on_attach = function(_, bufnr)
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap(
-    '<leader>ds',
-    require('telescope.builtin').lsp_document_symbols,
-    '[D]ocument [S]ymbols'
-  )
-  nmap(
-    '<leader>ws',
-    require('telescope.builtin').lsp_dynamic_workspace_symbols,
-    '[W]orkspace [S]ymbols'
-  )
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -504,11 +486,9 @@ local on_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('<leader>Wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -580,10 +560,7 @@ cmp.setup({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
+    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true,}),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -614,6 +591,9 @@ cmp.setup({
 
 local map = vim.api.nvim_set_keymap
 
+-- Better scrolling
+map('n', '<C-d>', "<C-d>zz", { noremap = true, silent = false })
+map('n', '<C-u>', "<C-u>zz", { noremap = true, silent = false })
 -- Better copy and paste
 map('n', '<leader>p', '"+p', { noremap = true, silent = false })
 map('v', '<leader>p', '"+p', { noremap = true, silent = false })
@@ -648,7 +628,7 @@ map('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = false })
 map('n', '<leader>bw', ':bw<CR>', { noremap = true, silent = false })
 
 -- Fast Save
-map('n', '<leader>ww', ':w<CR>', { noremap = true, silent = false })
+map('n', '<leader>w', ':w<CR>', { noremap = true, silent = false })
 
 -- Tabs
 -- Go to tab by number
@@ -670,57 +650,39 @@ map('n', '<leader>to', ':tabonly<CR>', { noremap = true, silent = false })
 
 -- Debugging
 -- For C/C++/Rust use CodeLLDB
---
 vim.cmd([[
 let g:vimspector_sidebar_width = 85
 let g:vimspector_bottombar_height = 15
 let g:vimspector_terminal_maxwidth = 70
 ]])
-map(
-  'n',
-  '<leader>dl',
-  ':call vimspector#Launch()<cr>',
-  { noremap = true, silent = false }
-)
-map('n', '<leader>dr', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
-map(
-  'n',
-  '<leader>do',
-  ':call vimspector#StepOver()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>dt',
-  ':call vimspector#StepOut()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>di',
-  ':call vimspector#StepInto()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>db',
-  ':call vimspector#ToggleBreakpoint()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>dw',
-  ':call vimspector#AddWatch()<cr>',
-  { noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>de',
-  ':call vimspector#Evaluate()<cr>',
-  { noremap = true, silent = false }
-)
+map('n', '<leader>dl', ':call vimspector#Launch()<cr>', { noremap = true, silent = false })
+map('n', '<leader>do', ':call vimspector#StepOver()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dt', ':call vimspector#StepOut()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>di', ':call vimspector#StepInto()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>db', ':call vimspector#ToggleBreakpoint()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dw', ':call vimspector#AddWatch()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>de', ':call vimspector#Evaluate()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>ds', ':call vimspector#Stop()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dR', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
+map('n', '<leader>dr', ':call vimspector#Restart()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>dc', ':call vimspector#ClearBreakpoints()<cr>',{ noremap = true, silent = false })
 
+-- Refactoring
+-- Remaps for the refactoring operations currently offered by the plugin
+vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+-- Extract block doesn't need visual mode
+vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("n", "<leader>rB", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
+-- Inline variable can also pick up the identifier currently under the cursor without visual mode
+vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
 
+-- Rest.nvim
+map('n', '<leader>R', '<Plug>RestNvim',{ noremap = true, silent = false })
+map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false })
+map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
 if not status then
@@ -756,27 +718,12 @@ map('n', '<leader>gp', ':Git push<CR>', { noremap = true, silent = false })
 map('n', '<leader>gP', ':Git pull<CR>', { noremap = true, silent = false })
 
 -- Workspace remaps
-map(
-  'n',
-  '<leader>wc',
-  ':pwd<CR>',
-  { desc = '[W]orkspace [C]urrent', noremap = true, silent = false }
-)
-map(
-  'n',
-  '<leader>wd',
-  ':cd %:p:h<CR>:pwd<CR>',
-  { desc = '[W]orkspace [D]irectory', noremap = true, silent = false }
-)
+map( 'n', '<leader>wc', ':pwd<CR>', { desc = '[W]orkspace [C]urrent', noremap = true, silent = false })
+map( 'n', '<leader>wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irectory', noremap = true, silent = false })
 map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
 
-
 -- ChatGPT
--- export OPENAI_API_KEY = <ChatGPT/OPENAI_KEY>
 map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
-map('n', '<leader>aa', ':ChatGPTActAs<CR>', { noremap = true, silent = false })
-map('n', '<leader>ae', ':ChatGPTEditWithInstructions<CR>', { noremap = true, silent = false })
-
 
 -- Install linters for these languages.
 -- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',
@@ -831,21 +778,9 @@ local function prettier()
   return {
     exe = 'prettier',
     args = {
-      '--config-precedence',
-      'prefer-file',
-      '--single-quote',
-      '--prose-wrap',
-      'always',
-      '--arrow-parens',
-      'always',
-      '--trailing-comma',
-      'all',
-      '--no-semi',
-      '--end-of-line',
-      'lf',
-      '--print-width',
-      80,
-      '--stdin-filepath',
+      '--config-precedence', 'prefer-file', '--single-quote', '--prose-wrap',
+      'always', '--arrow-parens', 'always', '--trailing-comma', 'all',
+      '--no-semi', '--end-of-line', 'lf', '--print-width', 80, '--stdin-filepath',
       vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
     },
     stdin = true,
@@ -932,17 +867,9 @@ formatter.setup({
         return {
           exe = 'stylua',
           args = {
-            '--indent-type',
-            'Spaces',
-            '--line-endings',
-            'Unix',
-            '--quote-style',
-            'AutoPreferSingle',
-            '--indent-width',
-            vim.bo.tabstop,
-            '--column-width',
-            80,
-            '-',
+            '--indent-type', 'Spaces', '--line-endings', 'Unix', '--quote-style', 
+            'AutoPreferSingle', '--indent-width', vim.bo.tabstop, '--column-width',
+            80, '-',
           },
           stdin = true,
         }
