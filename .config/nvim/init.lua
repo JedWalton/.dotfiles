@@ -683,15 +683,6 @@ vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').re
 map('n', '<leader>R', '<Plug>RestNvim',{ noremap = true, silent = false })
 map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false })
 map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
--- AutoPairs
-local status, autopairs = pcall(require, 'nvim-autopairs')
-if not status then
-  return
-end
-
-autopairs.setup({
-  disable_filetype = { 'TelescopePrompt', 'vim' },
-})
 
 -- CoPilot
 cmp.event:on('menu_opened', function()
@@ -718,9 +709,19 @@ map('n', '<leader>gp', ':Git push<CR>', { noremap = true, silent = false })
 map('n', '<leader>gP', ':Git pull<CR>', { noremap = true, silent = false })
 
 -- Workspace remaps
-map( 'n', '<leader>wc', ':pwd<CR>', { desc = '[W]orkspace [C]urrent', noremap = true, silent = false })
-map( 'n', '<leader>wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irectory', noremap = true, silent = false })
-map('n', '<leader>wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
+map( 'n', '<leader>Wc', ':pwd<CR>', { desc = '[W]orkspace [C]urrent', noremap = true, silent = false })
+map( 'n', '<leader>Wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irectory', noremap = true, silent = false })
+map('n', '<leader>Wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
+
+-- AutoPairs
+local status, autopairs = pcall(require, 'nvim-autopairs')
+if not status then
+  return
+end
+
+autopairs.setup({
+  disable_filetype = { 'TelescopePrompt', 'vim' },
+})
 
 -- ChatGPT
 map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
