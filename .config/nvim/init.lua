@@ -344,7 +344,14 @@ require('telescope').setup({
     --     ['<C-d>'] = false,
     --   },
     -- },
+    file_ignore_patterns = {"node_modules", ".git/", ".cache", "%.o", "%.a", "%.out", "%.class",
+		"%.pdf", "%.mkv", "%.mp4", "%.zip"} 
   },
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  }
 })
 
 -- Enable telescope fzf native, if installed
