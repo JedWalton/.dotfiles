@@ -125,7 +125,7 @@ require('packer').startup(function(use)
 
   use('mfussenegger/nvim-lint')
 
-  use({ 'mhartington/formatter.nvim' })
+  require('packer').use({ 'mhartington/formatter.nvim' })
 
   -- Packer
   use({
@@ -154,6 +154,47 @@ require('packer').startup(function(use)
           {"nvim-lua/plenary.nvim"},
           {"nvim-treesitter/nvim-treesitter"}
       }
+  }
+
+  use {
+    "rest-nvim/rest.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("rest-nvim").setup({
+        -- Open request results in a horizontal split
+        result_split_horizontal = false,
+        -- Keep the http file buffer above|left when split horizontal|vertical
+        result_split_in_place = false,
+        -- Skip SSL verification, useful for unknown certificates
+        skip_ssl_verification = false,
+        -- Encode URL before making request
+        encode_url = true,
+        -- Highlight request on run
+        highlight = {
+          enabled = true,
+          timeout = 150,
+        },
+        result = {
+          -- toggle showing URL, HTTP info, headers at top the of result window
+          show_url = true,
+          show_http_info = true,
+          show_headers = true,
+          -- executables or functions for formatting response body [optional]
+          -- set them to false if you want to disable them
+          formatters = {
+            json = "jq",
+            html = function(body)
+              return vim.fn.system({"tidy", "-i", "-q", "-"}, body)
+            end
+          },
+        },
+        -- Jump to request line on run
+        jump_to_request = false,
+        env_file = '.env',
+        custom_dynamic_variables = {},
+        yank_dry_run = true,
+      })
+    end
   }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
@@ -303,14 +344,7 @@ require('telescope').setup({
     --     ['<C-d>'] = false,
     --   },
     -- },
-    file_ignore_patterns = {"node_modules", ".git/", ".cache", "%.o", "%.a", "%.out", "%.class",
-		"%.pdf", "%.mkv", "%.mp4", "%.zip"} 
   },
-  pickers = {
-    find_files = {
-      hidden = true
-    }
-  }
 })
 
 -- Enable telescope fzf native, if installed
@@ -441,10 +475,10 @@ local on_attach = function(_, bufnr)
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<leader>Ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -645,6 +679,10 @@ vim.api.nvim_set_keymap("n", "<leader>rB", [[ <Cmd>lua require('refactoring').re
 -- Inline variable can also pick up the identifier currently under the cursor without visual mode
 vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
 
+-- Rest.nvim
+map('n', '<leader>R', '<Plug>RestNvim',{ noremap = true, silent = false })
+map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false })
+map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
 if not status then
@@ -654,11 +692,6 @@ end
 autopairs.setup({
   disable_filetype = { 'TelescopePrompt', 'vim' },
 })
-
--- Rest.nvim
-map('n', '<leader>R', '<Plug>RestNvim',{ noremap = true, silent = false })
-map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false })
-map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
 
 -- CoPilot
 cmp.event:on('menu_opened', function()
@@ -688,16 +721,6 @@ map('n', '<leader>gP', ':Git pull<CR>', { noremap = true, silent = false })
 map( 'n', '<leader>Wc', ':pwd<CR>', { desc = '[W]orkspace [C]urrent', noremap = true, silent = false })
 map( 'n', '<leader>Wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irectory', noremap = true, silent = false })
 map('n', '<leader>Wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
-
--- AutoPairs
-local status, autopairs = pcall(require, 'nvim-autopairs')
-if not status then
-  return
-end
-
-autopairs.setup({
-  disable_filetype = { 'TelescopePrompt', 'vim' },
-})
 
 -- ChatGPT
 map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
@@ -865,4 +888,3 @@ formatter.setup({
 -- gh.nvim
 -- More comprehensize snippets in luasnip
 -- Decompose init.lua into individual plugins
--- Fix formatting for Go development
