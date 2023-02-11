@@ -1,3 +1,5 @@
+source ~/.vimrc
+
 set NERDTree
 set relativenumber
 set number
@@ -8,7 +10,7 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 
 " Tool windows (NerdTree)
-map <leader>e <Action>(ActivateProjectToolWindow)
+map <leader>t <Action>(ActivateProjectToolWindow)
 
 " don't lose selection when indenting
 vnoremap < <gv
@@ -28,27 +30,24 @@ nmap <leader>= :action EditorResetFontSize<CR>
 nnoremap <c-o> :action Back<cr>
 nnoremap <c-i> :action Forward<cr>
 
-nmap <leader>ee :action GotoFile<CR>
+nmap <leader>e :action GotoFile<CR>
 nmap <leader>a :action FindInPath<CR>
 nmap gr :action ShowUsages<CR>
-nmap gd :action GotoDeclaration<CR>
 nmap gi :action GotoImplementation<CR>
 nmap gs :action GotoSuperMethod<CR>
 
 nmap <leader>l :action NextTab<CR>
 nmap <leader>L :action PreviousTab<CR>
-nmap <leader>n :action GotoNextError<CR>
 
-nmap <leader>sf :action SearchEverywhere<CR>
-nmap <leader>sg :action FindInPath<CR>
+nmap <leader>n :action GotoNextError<CR>
 
 
 nmap <leader>ri :action Inline<CR>
 nmap <leader>rr :action RenameElement<CR>
 nmap <leader>rev :action IntroduceVariable<CR>
 vmap <leader>rev :action IntroduceVariable<CR>
-nmap <leader>rf :action ExtractMethod<CR>
-vmap <leader>rf :action ExtractMethod<CR>
+nmap <leader>rem :action ExtractMethod<CR>
+vmap <leader>rem :action ExtractMethod<CR>
 nmap <leader>rei :action ExtractInterface<CR>
 nmap <leader>rei :action ExtractInterface<CR>
 nmap <leader>rm :action Move<CR>
@@ -62,7 +61,6 @@ nmap <, :action MoveElementLeft<CR>
 nmap >, :action MoveElementRight<CR>
 
 
-nnoremap <leader>e :NERDTreeFocus<CR>
 " Easy window split navigation {{{
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -94,6 +92,6 @@ nmap ,T :action RerunFailedTests<cr>
 nmap ,p :action ToggleLineBreakpoint<cr>
 nmap ,i :action ParameterInfo<cr>
 
-Commenting
-nmap <Leader>gc :action CommentByLineComment<CR>
-nmap <Leader>gc :action CommentByBlockComment<CR>
+" Commenting
+nmap <Leader>cc :action CommentByLineComment<CR>
+nmap <Leader>cb :action CommentByBlockComment<CR>
