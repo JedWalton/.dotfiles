@@ -16,7 +16,7 @@ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 
 alias mk="minikube kubectl --"
 
-alias gp='git add . && git commit -m "+" && git push'
+
 
 ## Misc configuration
 #echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
