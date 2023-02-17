@@ -176,8 +176,8 @@ bindsym $mod+Shift+n exec --no-startup-id ~/dotfiles/bin/resolution
 # FKeys
 # Pulse Audio controls
 bindsym $mod+semicolon exec pactl set-sink-mute @DEFAULT_SINK@ toggle # Mute
-bindsym $mod+period exec pactl set-sink-volume @DEFAULT_SINK@ -5%  # Up
-bindsym $mod+comma exec pactl set-sink-volume @DEFAULT_SINK@ +5%  # Down
+bindsym $mod+period exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+comma exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 # # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
