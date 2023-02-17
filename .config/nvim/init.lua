@@ -344,14 +344,7 @@ require('telescope').setup({
     --     ['<C-d>'] = false,
     --   },
     -- },
-    file_ignore_patterns = {"node_modules", ".git/", ".cache", "%.o", "%.a", "%.out", "%.class",
-		"%.pdf", "%.mkv", "%.mp4", "%.zip"} 
   },
-  pickers = {
-    find_files = {
-      hidden = true
-    }
-  }
 })
 
 -- Enable telescope fzf native, if installed
@@ -482,10 +475,10 @@ local on_attach = function(_, bufnr)
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<leader>Ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -690,6 +683,15 @@ vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').re
 map('n', '<leader>R', '<Plug>RestNvim',{ noremap = true, silent = false })
 map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false })
 map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
+-- AutoPairs
+local status, autopairs = pcall(require, 'nvim-autopairs')
+if not status then
+  return
+end
+
+autopairs.setup({
+  disable_filetype = { 'TelescopePrompt', 'vim' },
+})
 
 -- CoPilot
 cmp.event:on('menu_opened', function()
@@ -719,16 +721,6 @@ map('n', '<leader>gP', ':Git pull<CR>', { noremap = true, silent = false })
 map( 'n', '<leader>Wc', ':pwd<CR>', { desc = '[W]orkspace [C]urrent', noremap = true, silent = false })
 map( 'n', '<leader>Wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irectory', noremap = true, silent = false })
 map('n', '<leader>Wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
-
--- AutoPairs
-local status, autopairs = pcall(require, 'nvim-autopairs')
-if not status then
-  return
-end
-
-autopairs.setup({
-  disable_filetype = { 'TelescopePrompt', 'vim' },
-})
 
 -- ChatGPT
 map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
