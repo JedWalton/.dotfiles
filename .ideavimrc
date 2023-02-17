@@ -94,6 +94,13 @@ nmap ,T :action RerunFailedTests<cr>
 nmap ,p :action ToggleLineBreakpoint<cr>
 nmap ,i :action ParameterInfo<cr>
 
+nmap <leader>dl :action Debug<CR>
+nmap <leader>do :action SetOver<CR>
+nmap <leader>dt :action StepOut<CR>
+nmap <leader>di :action StepInto<CR>
+nmap <leader>db :action ToggleLineBreakpoint<CR>
+
+
 Commenting
 nmap <Leader>gc :action CommentByLineComment<CR>
-nmap <Leader>gc :action CommentByBlockComment<CR>
+"nmap <Leader>gc :action CommentByBlockComment<CR>
