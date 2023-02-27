@@ -52,11 +52,12 @@ vmap <leader>rf :action ExtractMethod<CR>
 nmap <leader>rei :action ExtractInterface<CR>
 nmap <leader>rei :action ExtractInterface<CR>
 nmap <leader>rm :action Move<CR>
+vmap <leader>rm :action Move<CR>
 nmap <leader>ro :action OptimizeImports<CR>
 nmap <leader>rG :action Generate<CR>
 nmap <leader>w :action CloseEditor<CR>
 
-nmap <leader>f  :action ReformatCode<CR>
+nmap <leader>f :action ReformatCode<CR>
 
 nmap <, :action MoveElementLeft<CR>
 nmap >, :action MoveElementRight<CR>
@@ -101,6 +102,19 @@ nmap <leader>di :action StepInto<CR>
 nmap <leader>db :action ToggleLineBreakpoint<CR>
 
 
-Commenting
-nmap <Leader>gc :action CommentByLineComment<CR>
-"nmap <Leader>gc :action CommentByBlockComment<CR>
+" Commenting
+"nmap <Leader>gc :action CommentByLineComment<CR>
+nmap <Leader>gc :action CommentByBlockComment<CR>
+
+
+
+map <leader>1 1gt
+map <leader>2 2gt
+map <leader>3 3gt
+map <leader>4 4gt
+map <leader>5 5gt
+map <leader>6 6gt
+map <leader>7 7gt
+map <leader>8 8gt
+map <leader>9 9gt
+map <leader>tc :action tabclose<CR>
