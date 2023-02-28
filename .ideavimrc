@@ -121,3 +121,8 @@ map <leader>tc :tabclose<CR>
 
 map <C-s>% <C-w>v
 map <C-s>" <C-w>s
+
+
+set clipboard+=unnamed
+
+
