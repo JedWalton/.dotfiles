@@ -18,6 +18,8 @@ alias mk="minikube kubectl --"
 
 alias gp='git add . && git commit -m "+" && git push'
 
+alias t='cd ~/Git/simplebitcoin && tmux'
+
 ## Misc configuration
 #echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
 #If that doesn't work, remember to set it back to 1 for consistency's sake:
