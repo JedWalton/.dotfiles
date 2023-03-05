@@ -197,6 +197,12 @@ require('packer').startup(function(use)
     end
   }
 
+  -- install without yarn or npm
+  use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -683,6 +689,10 @@ vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').re
 map('n', '<leader>R', '<Plug>RestNvim',{ noremap = true, silent = false })
 map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false })
 map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
+
+-- Markdown
+
+map('n', '<leader>mp', ':call MarkdownPreviewToggle()<cr>',{ noremap = true, silent = false })
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
 if not status then
@@ -866,11 +876,6 @@ formatter.setup({
       function()
         return {
           exe = 'stylua',
-          args = {
-            '--indent-type', 'Spaces', '--line-endings', 'Unix', '--quote-style', 
-            'AutoPreferSingle', '--indent-width', vim.bo.tabstop, '--column-width',
-            80, '-',
-          },
           stdin = true,
         }
       end,
