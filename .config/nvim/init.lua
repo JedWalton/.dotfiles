@@ -692,7 +692,10 @@ map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
 
 -- Markdown
 
-map('n', '<leader>mp', ':call MarkdownPreviewToggle()<cr>',{ noremap = true, silent = false })
+map('n', '<leader>mp', ':MarkdownPreview<cr>',{ noremap = true, silent = false })
+map('n', '<leader>ms', ':MarkdownPreviewStop<cr>',{ noremap = true, silent = false })
+map('n', '<leader>mt', ':MarkdownPreviewToggle<cr>',{ noremap = true, silent = false })
+
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
 if not status then
