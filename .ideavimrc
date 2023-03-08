@@ -121,7 +121,6 @@ map <C-s>% <C-w>v
 map <C-s>" <C-w>s
 map <C-s>x :tabclose<CR>
 
-
 set clipboard+=unnamed
 
 
