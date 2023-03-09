@@ -28,8 +28,6 @@ nmap <leader>= :action EditorResetFontSize<CR>
 nnoremap <c-o> :action Back<cr>
 nnoremap <c-i> :action Forward<cr>
 
-nmap <leader>ee :action GotoFile<CR>
-nmap <leader>a :action FindInPath<CR>
 nmap gr :action ShowUsages<CR>
 nmap gd :action GotoDeclaration<CR>
 nmap gi :action GotoImplementation<CR>
@@ -39,7 +37,7 @@ nmap <leader>l :action NextTab<CR>
 nmap <leader>L :action PreviousTab<CR>
 nmap <leader>n :action GotoNextError<CR>
 
-nmap <leader>sf :action SearchEverywhere<CR>
+nmap <leader>sf :action GotoFile<CR>
 nmap <leader>sg :action FindInPath<CR>
 
 
@@ -55,7 +53,7 @@ nmap <leader>rm :action Move<CR>
 vmap <leader>rm :action Move<CR>
 nmap <leader>ro :action OptimizeImports<CR>
 nmap <leader>rG :action Generate<CR>
-nmap <leader>w :action CloseEditor<CR>
+nmap <leader>q :action CloseEditor<CR>
 
 nmap <leader>f :action ReformatCode<CR>
 
@@ -121,6 +119,7 @@ map <leader>tc :tabclose<CR>
 
 map <C-s>% <C-w>v
 map <C-s>" <C-w>s
+map <C-s>x :tabclose<CR>
 
 set clipboard+=unnamed
 
