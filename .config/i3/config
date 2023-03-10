@@ -206,7 +206,7 @@ exec "xset r rate 225 70"
 exec "setxkbmap -layout 'us' -variant 'dvorak' -option ctrl:swapcaps altwin:swap_alt_win"
 
 # wallpaper
-exec "feh --bg-scale ~/Pictures/cube.png"
+exec "feh --bg-scale ~/Pictures/wallpaper.jpg"
 
 # for transparency
 exec --no-startup-id compton
