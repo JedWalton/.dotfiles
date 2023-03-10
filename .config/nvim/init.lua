@@ -213,9 +213,6 @@ require('packer').startup(function(use)
   end
 
 
-  -- nice transparency
-  use('xiyaowong/nvim-transparent')
-
 end)
 
 -- When we are bootstrapping a configuration, it doesn't
@@ -245,16 +242,6 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- Set colorscheme
 -- vim.o.background = "light" -- --[[ o ]]r "light" for light mode
 vim.cmd([[colorscheme tokyonight-storm]])
--- nice transparency
-require("transparent").setup({
-  enable = true, -- boolean: enable transparent
-  extra_groups = { -- table/string: additional groups that should be cleared
-    -- In particular, when you set it to 'all', that means all available groups
-    'all'
-  },
-  exclude = {}, -- table: groups you don't want to clear
-})
-
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -508,17 +495,7 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   clangd = {},
-  -- gopls = {},
-  pyright = {},
   rust_analyzer = {},
-  tsserver = {},
-
-  sumneko_lua = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
 }
 
 -- Setup neovim lua configuration
