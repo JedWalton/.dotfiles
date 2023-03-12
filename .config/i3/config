@@ -228,4 +228,4 @@ workspace "10" output HDMI-1
 exec --no-startup-id xrandr --output HDMI-1 --right-of eDP-1
 bindsym $mod+x exec --no-startup-id xrandr --output HDMI-1 --auto --right-of eDP-1
 
-
+exec --no-startup-id picom -CGb
