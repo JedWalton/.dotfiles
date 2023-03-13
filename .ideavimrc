@@ -101,11 +101,9 @@ nmap <leader>db :action ToggleLineBreakpoint<CR>
 
 
 " Commenting
-"nmap <Leader>gc :action CommentByLineComment<CR>
-nmap <Leader>gc :action CommentByBlockComment<CR>
+nmap <Leader>gc :action CommentByLineComment<CR>
 
-
-
+" Tabs
 map <leader>1 1gt
 map <leader>2 2gt
 map <leader>3 3gt
@@ -116,6 +114,7 @@ map <leader>7 7gt
 map <leader>8 8gt
 map <leader>9 9gt
 map <leader>tc :tabclose<CR>
+map <leader>tn :tabnew<CR>
 
 map <C-s>% <C-w>v
 map <C-s>" <C-w>s
@@ -123,4 +122,5 @@ map <C-s>x :tabclose<CR>
 
 set clipboard+=unnamed
 
-
+map <C-u> <C-u>zz
+map <C-d> <C-d>zz
