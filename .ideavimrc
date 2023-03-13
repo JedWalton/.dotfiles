@@ -85,12 +85,12 @@ nmap <Leader>gb :action Git.Branches<CR>
 nmap ,c :action CompileDirty<cr>
 nmap ,r :action Run<cr>
 nmap ,R :action RunAnything<cr>
-nmap ,b :action Debug<cr>
+nmap ,d :action Debug<cr>
 nmap ,c :action RunClass<cr>
-nmap ,d :action DebugClass<cr>
+nmap ,D :action DebugClass<cr>
 nmap ,t :action RerunTests<cr>
 nmap ,T :action RerunFailedTests<cr>
-nmap ,p :action ToggleLineBreakpoint<cr>
+nmap ,b :action ToggleLineBreakpoint<cr>
 nmap ,i :action ParameterInfo<cr>
 
 nmap <leader>dl :action Debug<CR>
