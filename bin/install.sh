@@ -125,6 +125,8 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     ln -s /usr/local/bin/nvim /usr/bin/nvim && \
     sudo chmod +x /usr/local/bin/nvim
 
+# FZF
+sudo apt install -y fzf
 
 # xfce4-terminal
 sudo apt install -y xfce4-terminal
@@ -152,5 +154,9 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key ad
 echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 sudo apt-get update -y
 sudo apt-get install -y google-chrome-stable
+
+
+# Bluetooth
+sudo apt install -y bluetooth bluez bluez-tools rfkill blueman
 
 
