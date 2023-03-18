@@ -98,11 +98,28 @@ require('packer').startup(function(use)
             enabled = true,
             auto_refresh = false,
             keymap = {
-              jump_prev = '[[',
-              jump_next = ']]',
-              accept = '<CR>',
-              refresh = 'gr',
-              open = '<C-CR>',
+              jump_prev = "[[",
+              jump_next = "]]",
+              accept = "<CR>",
+              refresh = "gr",
+              open = "<M-CR>"
+            },
+            layout = {
+              position = "bottom", -- | top | left | right
+              ratio = 0.4
+            },
+          },
+          suggestion = {
+            enabled = true,
+            auto_trigger = false,
+            debounce = 75,
+            keymap = {
+              accept = "<M-l>",
+              accept_word = false,
+              accept_line = false,
+              next = "<M-]>",
+              prev = "<M-[>",
+              dismiss = "<C-]>",
             },
           },
           filetypes = {
@@ -114,7 +131,7 @@ require('packer').startup(function(use)
             hgcommit = false,
             svn = false,
             cvs = false,
-            ['.'] = false,
+            ["."] = false,
           },
           copilot_node_command = 'node', -- Node.js version must be > 16.x
           server_opts_overrides = {},
@@ -127,19 +144,19 @@ require('packer').startup(function(use)
 
 
   -- Packer
-  use({
-    "jackMort/ChatGPT.nvim",
-      config = function()
-        require("chatgpt").setup({
-          -- optional configuration
-        })
-      end,
-      requires = {
-        "MunifTanjim/nui.nvim",
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope.nvim"
-      }
-  })
+  -- use({
+  --   "jackMort/ChatGPT.nvim",
+  --     config = function()
+  --       require("chatgpt").setup({
+  --         -- optional configuration
+  --       })
+  --     end,
+  --     requires = {
+  --       "MunifTanjim/nui.nvim",
+  --       "nvim-lua/plenary.nvim",
+  --       "nvim-telescope/telescope.nvim"
+  --     }
+  -- })
 
   -- tmux
   use({
@@ -659,17 +676,17 @@ let g:vimspector_sidebar_width = 85
 let g:vimspector_bottombar_height = 15
 let g:vimspector_terminal_maxwidth = 70
 ]])
-map('n', '<leader>dl', ':call vimspector#Launch()<cr>', { noremap = true, silent = false })
-map('n', '<leader>do', ':call vimspector#StepOver()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>dt', ':call vimspector#StepOut()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>di', ':call vimspector#StepInto()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>db', ':call vimspector#ToggleBreakpoint()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>dw', ':call vimspector#AddWatch()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>de', ':call vimspector#Evaluate()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>ds', ':call vimspector#Stop()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>dR', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
-map('n', '<leader>dr', ':call vimspector#Restart()<cr>',{ noremap = true, silent = false })
-map('n', '<leader>dc', ':call vimspector#ClearBreakpoints()<cr>',{ noremap = true, silent = false })
+map('n', ',d', ':call vimspector#Launch()<cr>', { noremap = true, silent = false })
+map('n', ',o', ':call vimspector#StepOver()<cr>',{ noremap = true, silent = false })
+map('n', ',O', ':call vimspector#StepOut()<cr>',{ noremap = true, silent = false })
+map('n', ',i', ':call vimspector#StepInto()<cr>',{ noremap = true, silent = false })
+map('n', ',b', ':call vimspector#ToggleBreakpoint()<cr>',{ noremap = true, silent = false })
+map('n', ',w', ':call vimspector#AddWatch()<cr>',{ noremap = true, silent = false })
+map('n', ',e', ':call vimspector#Evaluate()<cr>',{ noremap = true, silent = false })
+map('n', ',s', ':call vimspector#Stop()<cr>',{ noremap = true, silent = false })
+map('n', ',R', ':call vimspector#Reset()<cr>', { noremap = true, silent = false })
+map('n', ',r', ':call vimspector#Restart()<cr>',{ noremap = true, silent = false })
+map('n', ',c', ':call vimspector#ClearBreakpoints()<cr>',{ noremap = true, silent = false })
 
 -- Refactoring
 -- Remaps for the refactoring operations currently offered by the plugin
@@ -706,7 +723,7 @@ autopairs.setup({
 
 -- CoPilot
 cmp.event:on('menu_opened', function()
-  vim.b.copilot_suggestion_hidden = true
+  vim.b.copilot_suggestion_hidden = false 
 end)
 
 cmp.event:on('menu_closed', function()
@@ -734,7 +751,7 @@ map( 'n', '<leader>Wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irecto
 map('n', '<leader>Wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
 
 -- ChatGPT
-map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
+-- map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
 
 -- Install linters for these languages.
 -- ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'toml',

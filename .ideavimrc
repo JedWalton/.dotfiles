@@ -45,8 +45,8 @@ nmap <leader>ri :action Inline<CR>
 nmap <leader>rr :action RenameElement<CR>
 nmap <leader>rev :action IntroduceVariable<CR>
 vmap <leader>rev :action IntroduceVariable<CR>
-nmap <leader>rf :action ExtractMethod<CR>
-vmap <leader>rf :action ExtractMethod<CR>
+nmap <leader>rem :action ExtractMethod<CR>
+vmap <leader>rem :action ExtractMethod<CR>
 nmap <leader>rei :action ExtractInterface<CR>
 nmap <leader>rei :action ExtractInterface<CR>
 nmap <leader>rm :action Move<CR>
@@ -54,7 +54,8 @@ vmap <leader>rm :action Move<CR>
 nmap <leader>ro :action OptimizeImports<CR>
 nmap <leader>rG :action Generate<CR>
 nmap <leader>q :action CloseEditor<CR>
-
+nmap <leader>t :action Switcher<CR>
+vmap <leader>t :action Switcher<CR>
 nmap <leader>f :action ReformatCode<CR>
 
 nmap <, :action MoveElementLeft<CR>
@@ -115,7 +116,7 @@ map <leader>6 6gt
 map <leader>7 7gt
 map <leader>8 8gt
 map <leader>9 9gt
-map <leader>tc :tabclose<CR>
+map <leader>q :tabclose<CR>
 
 map <C-s>% <C-w>v
 map <C-s>" <C-w>s
