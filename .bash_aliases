@@ -18,9 +18,16 @@ alias mk="minikube kubectl --"
 
 alias gp='git add . && git commit -m "+" && git push'
 
-alias t='tmux'
 alias g='cd ~/Git'
 
 alias F='echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode && F keys'
 
-alias f='nvim $(fzf)'
+alias v='nvim'
+
+alias f='if [ -z "$TMUX" ]; then tmux new-session -s mysession "nvim \$(fzf)"; else echo "tmux session already active"; fi'
+
+# alias f='nvim $(fzf)'
+alias g='lazygit'
+
+alias t='if [ -z "$TMUX" ]; then tmux new-session -s mysession; else echo "tmux session already active"; fi'
+

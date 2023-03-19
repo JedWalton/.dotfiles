@@ -134,7 +134,6 @@ sudo apt install -y xfce4-terminal
 # Compton (for terminal transaprency)
 sudo apt install -y compton
 
-
 # Multiple monitors
 sudo apt-get -y install xrandr
 
@@ -142,7 +141,7 @@ sudo apt-get -y install xrandr
 sudo apt-get -y install feh
 
 # Fuser
-sudo apt-get install psmisc
+sudo apt-get install -y psmisc
 
 # Github desktop
 sudo wget https://github.com/shiftkey/desktop/releases/download/release-3.1.1-linux1/GitHubDesktop-linux-3.1.1-linux1.deb
@@ -155,9 +154,6 @@ echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sud
 sudo apt-get update -y
 sudo apt-get install -y google-chrome-stable
 
-
-# Bluetooth
-sudo apt install -y bluetooth bluez bluez-tools rfkill blueman
 
 # LazyGit
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
