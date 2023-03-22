@@ -31,3 +31,7 @@ alias g='lazygit'
 
 alias t='if [ -z "$TMUX" ]; then tmux new-session -s mysession; else echo "tmux session already active"; fi'
 
+# alias j='if [ -z "$TMUX" ]; then tmux new-session -s mysession && cd ~/Git/jedwaltondev; else echo "tmux session already active" && cd ~/Git/jedwaltondev; fi'
+alias j='if [ -z "$TMUX" ]; then tmux new-session -s jedwaltondev -n jedwaltondev -c ~/Git/jedwaltondev; else tmux switch-client -n jedwaltondev || (tmux new-window -n jedwaltondev -c ~/Git/jedwaltondev && tmux switch-client -n jedwaltondev); fi'
+
+alias d='cd ~/Downloads'

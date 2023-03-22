@@ -70,12 +70,26 @@ chmod +x /usr/local/bin/bazel
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 source ~/.bashrc
 
-#
+# Yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update -y
+sudo apt-get install -y yarn
+
+
 # Install Go
 curl -O https://go.dev/dl/go1.20.2.linux-amd64.tar.gz && \
 tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz && \
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash && \
 (grep -qxF 'export PATH=$PATH:/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile)
+
+
+# gcloud CLI
+sudo apt-get install -y apt-transport-https ca-certificates gnupg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg
+sudo apt-get update -y && sudo apt-get install -y google-cloud-cli
+
 
 
 # Install Rust

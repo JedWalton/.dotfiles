@@ -1,2 +1,7 @@
 
 .config/nvim/plugin/
+
+bin/*
+!bin/install.sh
+!bin/readme.md
+
