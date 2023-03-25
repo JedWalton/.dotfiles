@@ -138,11 +138,23 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     ln -s /usr/local/bin/nvim /usr/bin/nvim && \
     sudo chmod +x /usr/local/bin/nvim
 
+# Python3-pip
+sudo apt install -y python3-pip
+
+sudo pip3 install -y neovim
+
 # FZF
 sudo apt install -y fzf
 
 # xfce4-terminal
 sudo apt install -y xfce4-terminal
+
+# Gruvbox terminal theme
+# for a global installation the theme files need to be put into
+# /usr/share/xfce4/terminal/colorschemes
+
+mkdir -p ~/.local/share/xfce4/terminal/colorschemes
+cp ~/.dotfiles/.config/xfce4/terminal/*.theme ~/.local/share/xfce4/terminal/colorschemes/
 
 # Compton (for terminal transaprency)
 sudo apt install -y compton
@@ -182,8 +194,7 @@ sudo apt update -y
 
 sudo apt install -y nvidia-driver
 
+# OBS-studio
 sudo apt install -y obs-studio
 
-sudo apt install -y python3-pip
-sudo pip3 install -y neovim
 
