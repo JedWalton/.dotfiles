@@ -44,7 +44,7 @@ curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/b
 echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check && \
 install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl || exit 1 \
 kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null && \
-(grep -qxF 'complete -o default -F __start_kubectl k' ~/.bashrc || echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc)
+sudo grep -qxF 'complete -o default -F __start_kubectl k' ~/.bashrc || echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 
 # Knative
 curl -LO "https://github.com/sigstore/cosign/releases/download/v1.6.0/cosign-linux-amd64" && \
@@ -76,12 +76,11 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get update -y
 sudo apt-get install -y yarn
 
-
-# Install Go
-curl -O https://go.dev/dl/go1.20.2.linux-amd64.tar.gz && \
+Install Go
+curl -O https://storage.googleapis.com/golang/go1.20.2.linux-amd64.tar.gz
 tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz && \
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash && \
-(grep -qxF 'export PATH=$PATH:/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile)
+sudo grep -qxF 'export PATH=$PATH:/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
 
 
 # gcloud CLI
@@ -89,7 +88,6 @@ sudo apt-get install -y apt-transport-https ca-certificates gnupg
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg
 sudo apt-get update -y && sudo apt-get install -y google-cloud-cli
-
 
 
 # Install Rust
@@ -118,8 +116,7 @@ sudo apt --fix-broken install
 
 # Install Tmux
 sudo apt update
-sudo apt install -y git automake build-essential pkg-config libevent-dev libncurses5-dev bison
-git clone https://github.com/tmux/tmux.git
+sudo apt install -y git automake build-essential pkg-config libevent-dev libncurses5-dev bison git clone https://github.com/tmux/tmux.git
 cd tmux
 sh autogen.sh
 ./configure
