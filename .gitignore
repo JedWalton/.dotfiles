@@ -1,5 +1,6 @@
 
 .config/nvim/plugin/
+.config/nvim/pack/
 
 bin/*
 !bin/install.sh
