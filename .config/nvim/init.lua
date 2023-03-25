@@ -169,9 +169,9 @@ require('packer').startup(function(use)
       run = function() vim.fn["mkdp#util#install"]() end,
   })
 
-  use({
-    "xiyaowong/nvim-transparent"
-  })
+  -- use({
+  --   "xiyaowong/nvim-transparent"
+  -- })
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -215,22 +215,22 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- vim.cmd([[colorscheme tokyonight-storm]])
 vim.cmd([[colorscheme gruvbox]])
 
-require("transparent").setup({
-  enable = true, -- boolean: enable transparent
-  extra_groups = { -- table/string: additional groups that should be cleared
-    -- In particular, when you set it to 'all', that means all available groups
-
-    -- example of akinsho/nvim-bufferline.lua
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
-  },
-  exclude = {}, -- table: groups you don't want to clear
-  ignore_linked_group = true, -- boolean: don't clear a group that links to another group
-})
+-- require("transparent").setup({
+--   enable = true, -- boolean: enable transparent
+--   extra_groups = { -- table/string: additional groups that should be cleared
+--     -- In particular, when you set it to 'all', that means all available groups
+--
+--     -- example of akinsho/nvim-bufferline.lua
+--     "BufferLineTabClose",
+--     "BufferlineBufferSelected",
+--     "BufferLineFill",
+--     "BufferLineBackground",
+--     "BufferLineSeparator",
+--     "BufferLineIndicatorSelected",
+--   },
+--   exclude = {}, -- table: groups you don't want to clear
+--   ignore_linked_group = true, -- boolean: don't clear a group that links to another group
+-- })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
