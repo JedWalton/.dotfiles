@@ -7,12 +7,11 @@ alias cata="cat ~/.bash_aliases"
 alias sba="source ~/.bash_aliases && echo 'sourced ~/.bash_aliases'"
 alias sp="source ~/.profile && echo 'sourced ~/.profile'"
 
-alias night="xrandr --output HDMI-0 --brightness 0.3 && echo 'Goodnight :*'"
+alias night="xrandr --output HDMI-0 --brightness 0.3 && echo 'Owl mode'"
 alias eve="xrandr --output HDMI-0 --brightness 0.6 && echo 'Good evening'"
 alias day="xrandr --output HDMI-0 --brightness 1 && echo 'Wakey wakey'"
 
 alias k='kubectl'
-echo 'complete -o default -F __start_kubectl k'
 
 alias mk="minikube kubectl --"
 
