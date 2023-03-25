@@ -364,6 +364,7 @@ require('nvim-treesitter.configs').setup({
     'rust',
     'toml',
     'typescript',
+    'javascript',
     'html',
     'css',
     'json',
@@ -656,7 +657,6 @@ map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false 
 map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
 
 -- Markdown
-
 map('n', '<leader>mp', ':MarkdownPreview<cr>',{ noremap = true, silent = false })
 map('n', '<leader>ms', ':MarkdownPreviewStop<cr>',{ noremap = true, silent = false })
 map('n', '<leader>mt', ':MarkdownPreviewToggle<cr>',{ noremap = true, silent = false })
