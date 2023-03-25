@@ -12,7 +12,7 @@ alias eve="xrandr --output HDMI-0 --brightness 0.6 && echo 'Good evening'"
 alias day="xrandr --output HDMI-0 --brightness 1 && echo 'Wakey wakey'"
 
 alias k='kubectl'
-echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+echo 'complete -o default -F __start_kubectl k'
 
 alias mk="minikube kubectl --"
 
