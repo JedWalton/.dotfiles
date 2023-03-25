@@ -140,6 +140,10 @@ sudo apt install -y python3-pip
 
 sudo pip3 install -y neovim
 
+# CoPilot.vim
+git clone https://github.com/github/copilot.vim.git \
+  ~/.config/nvim/pack/github/start/copilot.vim
+
 # FZF
 sudo apt install -y fzf
 

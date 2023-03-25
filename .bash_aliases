@@ -23,7 +23,7 @@ alias F='echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode && F keys'
 
 alias v='nvim'
 
-alias f='if [ -z "$TMUX" ]; then tmux new-session -s mysession "nvim \$(fzf)"; else echo "tmux session already active"; fi'
+alias f='if [ -z "$TMUX" ]; then tmux new-session -s mysession "nvim \$(fzf)"; else nvim $(fzf); fi'
 
 # alias f='nvim $(fzf)'
 alias g='lazygit'
