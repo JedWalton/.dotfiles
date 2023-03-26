@@ -132,8 +132,9 @@ apt-get update && \
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
     chmod u+x nvim.appimage && \
     mv nvim.appimage /usr/local/bin/nvim && \
-    ln -s /usr/local/bin/nvim /usr/bin/nvim && \
-    sudo chmod +x /usr/local/bin/nvim
+    ln -s /usr/local/bin/nvim /usr/bin/nvim
+
+sudo chmod +x /usr/local/bin/nvim
 
 # Python3-pip
 sudo apt install -y python3-pip
