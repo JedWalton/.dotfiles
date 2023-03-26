@@ -198,4 +198,15 @@ sudo apt install -y nvidia-driver
 # OBS-studio
 sudo apt install -y obs-studio
 
+# Snap
+sudo apt update
+sudo apt install snapd
+sudo snap install core
+
+# Whatsapp
+sudo snap install whatsapp-for-linux
+
+# Bluetooth
+sudo apt-get install bluez
+sudo apt-get install blueman
 
