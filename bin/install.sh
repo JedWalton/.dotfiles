@@ -200,14 +200,18 @@ sudo apt install -y obs-studio
 
 # Snap
 sudo apt update
-sudo apt install snapd
-sudo snap install core
+sudo apt install -y snapd
+sudo snap install -y core
 
 # Whatsapp
-sudo snap install whatsapp-for-linux
+sudo snap install -y whatsapp-for-linux
 
 # Bluetooth
-sudo apt-get install bluez
-sudo apt-get install blueman
+sudo apt-get install -y bluez
+sudo apt-get install -y blueman
 
+# Scrot
+sudo apt-get install -y scrot
 
+# Zathura
+sudo apt-get install -y zathura

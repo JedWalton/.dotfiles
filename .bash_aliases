@@ -39,3 +39,5 @@ alias D='cd ~/.dotfiles'
 
 alias dp='docker rmi $(docker images -q)'
 
+alias s='scrot -s ~/Pictures/screenshot_%Y-%m-%d-%H-%M-%S.png'
+
