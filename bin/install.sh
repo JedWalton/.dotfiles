@@ -210,3 +210,4 @@ sudo snap install whatsapp-for-linux
 sudo apt-get install bluez
 sudo apt-get install blueman
 
+

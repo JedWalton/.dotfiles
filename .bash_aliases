@@ -34,3 +34,8 @@ alias t='if [ -z "$TMUX" ]; then tmux new-session -s mysession; else echo "tmux 
 alias j='if [ -z "$TMUX" ]; then tmux new-session -s jedwaltondev -n jedwaltondev -c ~/Git/jedwaltondev; else tmux switch-client -n jedwaltondev || (tmux new-window -n jedwaltondev -c ~/Git/jedwaltondev && tmux switch-client -n jedwaltondev); fi'
 
 alias d='cd ~/Downloads'
+
+alias D='cd ~/.dotfiles'
+
+alias dp='docker rmi $(docker images -q)'
+
