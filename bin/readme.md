@@ -1,4 +1,6 @@
-#After cloning the repo into ~/.dotfiles run:
+Tested on Debian 11
+
+##After cloning the repo into ~/.dotfiles run:
 $ stow .
 
 #To clean up symlinks run:
