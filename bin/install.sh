@@ -216,3 +216,9 @@ sudo apt-get install -y scrot
 
 # Zathura
 sudo apt-get install -y zathura
+
+# GIMP
+sudo snap install -y gimp
+
+# Kdenlive
+sudo apt install -y kdenlive
