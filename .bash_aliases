@@ -23,6 +23,8 @@ alias F='echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode && F keys'
 
 alias v='nvim'
 
+alias V='nvim ~/.dotfiles/.config/nvim/init.lua'
+
 alias f='if [ -z "$TMUX" ]; then tmux new-session -s mysession "nvim \$(fzf)"; else nvim $(fzf); fi'
 
 # alias f='nvim $(fzf)'

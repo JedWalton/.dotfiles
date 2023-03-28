@@ -766,10 +766,5 @@ vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
 
 -- To Do
 --------
--- Tmux multiplexer 
 -- Test runner https://github.com/vim-test/vim-test -> https://github.com/tpope/vim-dispatch
--- Get better at debugging in vimspector
--- Finish setting up fugitive
--- gh.nvim
--- More comprehensize snippets in luasnip
--- Decompose init.lua into individual plugins
+-- Formatters
