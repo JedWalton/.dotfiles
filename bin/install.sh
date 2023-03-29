@@ -136,14 +136,12 @@ curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 
 sudo chmod +x /usr/local/bin/nvim
 
-# Python3-pip
 sudo apt install -y python3-pip
 
 sudo pip3 install -y neovim
 
-# CoPilot.vim
-git clone https://github.com/github/copilot.vim.git \
-  ~/.config/nvim/pack/github/start/copilot.vim
+sudo apt-get install -y ripgrep
+sudo apt-get install -y fd-find
 
 # FZF
 sudo apt install -y fzf
