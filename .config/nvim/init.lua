@@ -656,6 +656,8 @@ map('n', '<leader>bw', ':bw<CR>', { noremap = true, silent = false })
 -- Fast Save
 map('n', '<leader>w', ':w<CR>', { noremap = true, silent = false })
 
+map('n', '<leader>f', ':Format<CR>', { noremap = true, silent = false })
+
 
 
 -- Tabs
@@ -775,6 +777,7 @@ vim.notify = function(msg, level, opts)
 	end
 end
 -- end of hacky workaround
+
 
 -- To Do
 --------
