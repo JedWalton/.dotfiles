@@ -76,7 +76,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get update -y
 sudo apt-get install -y yarn
 
-Install Go
+# Install Go
 curl -O https://storage.googleapis.com/golang/go1.20.2.linux-amd64.tar.gz
 tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz && \
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash && \
