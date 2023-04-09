@@ -1,5 +1,7 @@
 alias dcu="docker compose up -d"
 alias dcd="docker compose down -v"
+alias dp='docker rmi $(docker images -q)'
+alias nuke='docker rm -vf $(docker ps -aq)'
 
 alias vima="v ~/.bash_aliases"
 alias cata="cat ~/.bash_aliases"
@@ -38,7 +40,6 @@ alias d='cd ~/Downloads'
 
 alias D='cd ~/.dotfiles'
 
-alias dp='docker rmi $(docker images -q)'
 
 alias s='scrot -s ~/Pictures/screenshot_%Y-%m-%d-%H-%M-%S.png'
 
