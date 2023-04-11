@@ -129,10 +129,10 @@ apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Nvim
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
-    chmod u+x nvim.appimage && \
-    mv nvim.appimage /usr/local/bin/nvim && \
-    ln -s /usr/local/bin/nvim /usr/bin/nvim
+sudo curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage && \
+    sudo chmod u+x nvim.appimage && \
+    sudo mv nvim.appimage /usr/local/bin/nvim && \
+    sudo ln -s /usr/local/bin/nvim /usr/bin/nvim
 
 sudo chmod +x /usr/local/bin/nvim
 

@@ -1,7 +1,8 @@
 alias dcu="docker compose up -d"
 alias dcd="docker compose down -v"
 alias dp='docker rmi $(docker images -q)'
-alias nuke='docker rm -vf $(docker ps -aq)'
+alias nuke='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -aq) -f'
+
 
 alias vima="v ~/.bash_aliases"
 alias cata="cat ~/.bash_aliases"
