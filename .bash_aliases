@@ -1,7 +1,8 @@
 alias dcu="docker compose up -d"
 alias dcd="docker compose down -v"
 alias dp='docker rmi $(docker images -q)'
-alias nuke='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -aq) -f'
+alias nuke='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -aq) -f && docker volume rm $(docker volume ls -q)'
+alias prune='docker system prune -a && docker volume prune'
 
 
 alias vima="v ~/.bash_aliases"
@@ -35,7 +36,8 @@ alias g='lazygit'
 alias t='if [ -z "$TMUX" ]; then tmux new-session -s mysession; else echo "tmux session already active"; fi'
 
 # alias j='if [ -z "$TMUX" ]; then tmux new-session -s mysession && cd ~/Git/jedwaltondev; else echo "tmux session already active" && cd ~/Git/jedwaltondev; fi'
-alias j='if [ -z "$TMUX" ]; then tmux new-session -s jedwaltondev -n jedwaltondev -c ~/Git/jedwaltondev; else tmux switch-client -n jedwaltondev || (tmux new-window -n jedwaltondev -c ~/Git/jedwaltondev && tmux switch-client -n jedwaltondev); fi'
+alias j='cd ~/Git/jedwaltondev'
+alias ds='cd ~/Git/jedwaltondev/dev && ./start.sh'
 
 alias d='cd ~/Downloads'
 
@@ -43,4 +45,6 @@ alias D='cd ~/.dotfiles'
 
 
 alias s='scrot -s ~/Pictures/screenshot_%Y-%m-%d-%H-%M-%S.png'
+
+alias c='ssh dev@localhost -p 2222'
 
