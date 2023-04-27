@@ -77,9 +77,9 @@ sudo apt-get update -y
 sudo apt-get install -y yarn
 
 # Install Go
-curl -O https://storage.googleapis.com/golang/go1.20.2.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz && \
-curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash && \
+sudo curl -O https://storage.googleapis.com/golang/go1.20.2.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz && \
+sudo curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash && \
 sudo grep -qxF 'export PATH=$PATH:/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
 
 
@@ -116,7 +116,8 @@ sudo apt --fix-broken install
 
 # Install Tmux
 sudo apt update
-sudo apt install -y git automake build-essential pkg-config libevent-dev libncurses5-dev bison git clone https://github.com/tmux/tmux.git
+sudo apt install -y git automake build-essential pkg-config libevent-dev libncurses5-dev bison
+git clone https://github.com/tmux/tmux.git
 cd tmux
 sh autogen.sh
 ./configure
@@ -140,7 +141,7 @@ sudo apt install -y python3-pip
 
 sudo pip3 install -y neovim
 
-sudo apt-get install -y ripgrep
+sudo apt install -y ripgrep
 sudo apt-get install -y fd-find
 
 # FZF
@@ -160,7 +161,7 @@ cp ~/.dotfiles/.config/xfce4/terminal/*.theme ~/.local/share/xfce4/terminal/colo
 sudo apt install -y compton
 
 # Multiple monitors
-sudo apt-get -y install xrandr
+# sudo apt-get -y install xrandr
 
 # Feh (wallpaper)
 sudo apt-get -y install feh
