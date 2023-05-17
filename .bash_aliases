@@ -10,9 +10,9 @@ alias cata="cat ~/.bash_aliases"
 alias sba="source ~/.bash_aliases && echo 'sourced ~/.bash_aliases'"
 alias sp="source ~/.profile && echo 'sourced ~/.profile'"
 
-alias night="xrandr --output HDMI-0 --brightness 0.3 && echo 'Owl mode'"
-alias eve="xrandr --output HDMI-0 --brightness 0.6 && echo 'Good evening'"
-alias day="xrandr --output HDMI-0 --brightness 1 && echo 'Wakey wakey'"
+alias night="xrandr --output HDMI-1 --brightness 0.3 && echo 'Owl mode'"
+alias eve="xrandr --output HDMI-1 --brightness 0.6 && echo 'Good evening'"
+alias day="xrandr --output HDMI-1 --brightness 1 && echo 'Wakey wakey'"
 
 alias k='kubectl'
 
@@ -47,4 +47,14 @@ alias D='cd ~/.dotfiles'
 alias s='scrot -s ~/Pictures/screenshot_%Y-%m-%d-%H-%M-%S.png'
 
 alias c='ssh dev@localhost -p 2222'
+
+
+
+#Python
+alias venvactivate='source env/bin/activate'
+alias venvnew='python3 -m venv env'
+alias venvrequirements='pip install -r requirements.txt'
+alias venvfreeze='pip freeze > requirements.txt'
+alias venvdeactivate='deactivate'
+
 

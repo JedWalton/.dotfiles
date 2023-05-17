@@ -221,3 +221,9 @@ sudo snap install -y gimp
 
 # Kdenlive
 sudo apt install -y kdenlive
+
+# XFCE4-terminal
+sudo apt install xfce4-terminal
+
+# Stow
+sudo apt install stow
