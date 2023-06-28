@@ -18,7 +18,7 @@ alias k='kubectl'
 
 alias mk="minikube kubectl --"
 
-alias gp='git add . && git commit -m "+" && git push'
+alias gacp='git add . && git commit -m "+" && git push'
 
 alias g='cd ~/Git'
 
