@@ -11,6 +11,7 @@ alias sba="source ~/.bash_aliases && echo 'sourced ~/.bash_aliases'"
 alias sp="source ~/.profile && echo 'sourced ~/.profile'"
 
 alias night="xrandr --output HDMI-1 --brightness 0.3 && echo 'Owl mode'"
+alias evelate="xrandr --output HDMI-1 --brightness 0.6 && echo 'Eve late'"
 alias eve="xrandr --output HDMI-1 --brightness 0.6 && echo 'Good evening'"
 alias day="xrandr --output HDMI-1 --brightness 1 && echo 'Wakey wakey'"
 
