@@ -99,8 +99,6 @@ rustup install stable
 sudo apt install -y pandoc
 
 # Install LaTeX
-sudo apt-get install texlive -y
-
 apt-get update && apt-get install -y --no-install-recommends \
     texlive-latex-base \
     texlive-latex-extra \
@@ -229,5 +227,3 @@ sudo apt install xfce4-terminal
 
 # Stow
 sudo apt install stow
-
-
