@@ -773,18 +773,6 @@ vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
 -- Formatters
 
 
--- Hacky Workaround for Bazel-Rust related issues.
-local old_notify = vim.notify
-local silence_pat = '[lspconfig] cmd ("cargo'
-vim.notify = function(msg, level, opts)
-	if (string.sub(msg, 1, string.len(silence_pat)) ~= silence_pat)
-	then
-		old_notify(msg, level, opts)
-	end
-end
--- end of hacky workaround
-
-
 -- To Do
 --------
 -- Test runner https://github.com/vim-test/vim-test -> https://github.com/tpope/vim-dispatch
