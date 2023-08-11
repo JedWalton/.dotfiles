@@ -99,15 +99,17 @@ rustup install stable
 sudo apt install -y pandoc
 
 # Install LaTeX
-sudo apt-get update && apt-get install -y --no-install-recommends \
-    texlive-latex-base \
-    texlive-latex-extra \
-    texlive-fonts-recommended \
-    texlive-fonts-extra \
-    texlive-lang-english \
-    texlive-xetex && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+sudo apt install texlive-full -y
+# sudo apt-get update && apt-get install -y --no-install-recommends \
+#     texlive-latex-base \
+#     texlive-latex-extra \
+#     texlive-fonts-recommended \
+#     texlive-fonts-extra \
+#     texlive-lang-english \
+#     texlive-xetex && \
+#     apt-get clean && \
+#     rm -rf /var/lib/apt/lists/*
+
 
 # i3
 sudo apt update
