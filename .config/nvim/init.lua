@@ -172,46 +172,6 @@ require('packer').startup(function(use)
     end,
   }
 
-  use {
-    "rest-nvim/rest.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("rest-nvim").setup({
-        -- Open request results in a horizontal split
-        result_split_horizontal = false,
-        -- Keep the http file buffer above|left when split horizontal|vertical
-        result_split_in_place = false,
-        -- Skip SSL verification, useful for unknown certificates
-        skip_ssl_verification = false,
-        -- Encode URL before making request
-        encode_url = true,
-        -- Highlight request on run
-        highlight = {
-          enabled = true,
-          timeout = 150,
-        },
-        result = {
-          -- toggle showing URL, HTTP info, headers at top the of result window
-          show_url = true,
-          show_http_info = true,
-          show_headers = true,
-          -- executables or functions for formatting response body [optional]
-          -- set them to false if you want to disable them
-          formatters = {
-            json = "jq",
-            html = function(body)
-              return vim.fn.system({"tidy", "-i", "-q", "-"}, body)
-            end
-          },
-        },
-        -- Jump to request line on run
-        jump_to_request = false,
-        env_file = '.env',
-        custom_dynamic_variables = {},
-        yank_dry_run = true,
-      })
-    end
-  }
 
   -- install without yarn or npm
   use({
@@ -219,6 +179,7 @@ require('packer').startup(function(use)
       run = function() vim.fn["mkdp#util#install"]() end,
   })
 
+  use({'fatih/vim-go'})
   -- use({
   --   "xiyaowong/nvim-transparent"
   -- })
@@ -714,11 +675,6 @@ vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').re
 vim.api.nvim_set_keymap("n", "<leader>rB", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
 -- Inline variable can also pick up the identifier currently under the cursor without visual mode
 vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
-
--- Rest.nvim
-map('n', '<leader>R', '<Plug>RestNvim',{ noremap = true, silent = false })
-map('n', '<leader>Rp', '<Plug>RestNvimPreview',{ noremap = true, silent = false })
-map('n', '<leader>Rl', '<Plug>RestNvimLast',{ noremap = true, silent = false })
 
 -- Markdown
 map('n', '<leader>mp', ':MarkdownPreview<cr>',{ noremap = true, silent = false })

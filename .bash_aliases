@@ -13,6 +13,7 @@ alias sp="source ~/.profile && echo 'sourced ~/.profile'"
 alias night="xrandr --output HDMI-1 --brightness 0.3 && echo 'Owl mode'"
 alias evelate="xrandr --output HDMI-1 --brightness 0.6 && echo 'Eve late'"
 alias eve="xrandr --output HDMI-1 --brightness 0.6 && echo 'Good evening'"
+alias afternoon="xrandr --output HDMI-1 --brightness 0.8 && echo 'Good afternoon'"
 alias day="xrandr --output HDMI-1 --brightness 1 && echo 'Wakey wakey'"
 
 alias g='cd ~/Git'
