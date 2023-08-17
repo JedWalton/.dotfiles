@@ -78,9 +78,9 @@ sudo apt-get install -y yarn
 
 # Install Go
 sudo curl -O https://storage.googleapis.com/golang/go1.21.0.linux-amd64.tar.gz
-sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz && \
-sudo curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash && \
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
 sudo grep -qxF 'export PATH=$PATH:/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+source ~/.profile
 
 
 # gcloud CLI
