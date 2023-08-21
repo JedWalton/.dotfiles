@@ -1,7 +1,7 @@
 # Required packages  
 apt-get update \
   && apt-get install -y apt-transport-https ca-certificates curl gnupg \
-  lsb-release jq curl git cosign
+  lsb-release jq curl git gh cosign
 
 sudo apt --fix-broken install -y
 
