@@ -80,6 +80,9 @@ sudo apt-get install -y yarn
 sudo curl -O https://storage.googleapis.com/golang/go1.21.0.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
 sudo grep -qxF 'export PATH=$PATH:/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+# Set GOPATH and add its bin directory to PATH if they're not already there
+grep -qxF 'export GOPATH=$HOME/go' ~/.profile || echo 'export GOPATH=$HOME/go' >> ~/.profile
+grep -qxF 'export PATH=$PATH:$GOPATH/bin' ~/.profile || echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.profile
 source ~/.profile
 
 
