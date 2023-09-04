@@ -37,4 +37,8 @@ alias venvrequirements='pip install -r requirements.txt'
 alias venvfreeze='pip freeze > requirements.txt'
 alias venvdeactivate='deactivate'
 
+#Go
+alias gt='go test -v ./...'
+alias gi='go test -tags=integration -v ./...'
+alias gr='go run .'
 
