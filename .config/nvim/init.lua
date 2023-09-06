@@ -587,13 +587,12 @@ local map = vim.api.nvim_set_keymap
 -- Better scrolling
 map('n', '<C-d>', "<C-d>zz", { noremap = true, silent = false })
 map('n', '<C-u>', "<C-u>zz", { noremap = true, silent = false })
+
 -- Better copy and paste
--- Yank to system clipboard using xclip
-map('n', '<leader>y', ':w !xclip -in -selection clipboard<CR>', { noremap = true, silent = true })
-map('v', '<leader>y', ':w !xclip -in -selection clipboard<CR>', { noremap = true, silent = true })
--- Paste from system clipboard using xclip
-map('n', '<leader>p', ':r !xclip -out -selection clipboard<CR>', { noremap = true, silent = false })
-map('v', '<leader>p', ':r !xclip -out -selection clipboard<CR>', { noremap = true, silent = false })
+-- Yank to system clipboard using xclip in normal mode
+map('n', '<leader>y', 'yy:"_p<CR>:echo system("xclip -in -selection clipboard", @")<CR>', { noremap = true, silent = true })
+-- Yank to system clipboard using xclip in visual mode
+map('v', '<leader>y', 'y:echo system("xclip -in -selection clipboard", @0)<CR>', { noremap = true, silent = true })
 
 -- Smart way to move between windows
 map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })
