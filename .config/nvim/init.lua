@@ -588,13 +588,12 @@ local map = vim.api.nvim_set_keymap
 map('n', '<C-d>', "<C-d>zz", { noremap = true, silent = false })
 map('n', '<C-u>', "<C-u>zz", { noremap = true, silent = false })
 -- Better copy and paste
-map('n', '<leader>p', '"+p', { noremap = true, silent = false })
-map('v', '<leader>p', '"+p', { noremap = true, silent = false })
-map('n', '<leader>P', '"+P', { noremap = true, silent = false })
-map('v', '<leader>P', '"+P', { noremap = true, silent = false })
-map('n', '<leader>y', '"+y', { noremap = true, silent = false })
-map('v', '<leader>y', '"+y', { noremap = true, silent = false })
-map('n', '<leader>Y', '"+y$', { noremap = true, silent = false })
+-- Yank to system clipboard using xclip
+map('n', '<leader>y', ':w !xclip -in -selection clipboard<CR>', { noremap = true, silent = true })
+map('v', '<leader>y', ':w !xclip -in -selection clipboard<CR>', { noremap = true, silent = true })
+-- Paste from system clipboard using xclip
+map('n', '<leader>p', ':r !xclip -out -selection clipboard<CR>', { noremap = true, silent = false })
+map('v', '<leader>p', ':r !xclip -out -selection clipboard<CR>', { noremap = true, silent = false })
 
 -- Smart way to move between windows
 map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })

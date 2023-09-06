@@ -38,7 +38,8 @@ alias venvfreeze='pip freeze > requirements.txt'
 alias venvdeactivate='deactivate'
 
 #Go
-alias gt='go test -v ./...'
-alias gi='go test -tags=integration -v ./...'
+alias gt='go test ./...'
+alias gi='go test -tags=integration ./...'
+alias gtv='go test -v ./...'
+alias giv='go test -tags=integration -v ./...'
 alias gr='go run .'
-
