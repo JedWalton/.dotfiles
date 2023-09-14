@@ -1,4 +1,4 @@
-alias dcu="docker compose up -d"
+alias dcu="docker compose up"
 alias dcd="docker compose down -v"
 alias dp='docker rmi $(docker images -q)'
 alias nuke='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -aq) -f && docker volume rm $(docker volume ls -q)'
