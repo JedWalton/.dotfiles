@@ -15,6 +15,7 @@ alias evelate="xrandr --output HDMI-1 --brightness 0.6 && echo 'Eve late'"
 alias eve="xrandr --output HDMI-1 --brightness 0.6 && echo 'Good evening'"
 alias afternoon="xrandr --output HDMI-1 --brightness 0.8 && echo 'Good afternoon'"
 alias day="xrandr --output HDMI-1 --brightness 1 && echo 'Wakey wakey'"
+alias extremeday="xrandr --output HDMI-1 --brightness 1.1 && echo 'Wakey wakey'"
 
 alias g='cd ~/Git'
 alias F='echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode && F keys'
@@ -40,6 +41,14 @@ alias venvdeactivate='deactivate'
 #Go
 alias gt='go test ./...'
 alias gi='go test -tags=integration ./...'
+alias gip='go test -tags=integration ./... -p 1'
 alias gtv='go test -v ./...'
 alias giv='go test -tags=integration -v ./...'
+alias givp='go test -tags=integration -v ./... -p 1'
 alias gr='go run .'
+
+
+#Lines of code
+alias goloc="find . -name '*.go' | xargs wc -l | tail -n1"
+alias tsgoloc="find . -type f \( -name '*.ts' -o -name '*.js' -o -name '*.tsx' -o -name '*.jsx' -o -name '*.go' -o -name '*.sh' -o -name '*.yml' -o -name 'Dockerfile' -o -name 'Dockerfile.dev' \) | grep -v 'node_modules' | xargs wc -l"
+
