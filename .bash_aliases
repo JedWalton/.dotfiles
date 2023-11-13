@@ -52,3 +52,6 @@ alias gr='go run .'
 alias goloc="find . -name '*.go' | xargs wc -l | tail -n1"
 alias tsgoloc="find . -type f \( -name '*.ts' -o -name '*.js' -o -name '*.tsx' -o -name '*.jsx' -o -name '*.go' -o -name '*.sh' -o -name '*.yml' -o -name 'Dockerfile' -o -name 'Dockerfile.dev' \) | grep -v 'node_modules' | xargs wc -l"
 
+alias tcpd='sudo tcpdump -i any -s 0 -A "tcp port ${1:-8080}"' # use like 1=8080 tcpd
+
+
