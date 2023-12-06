@@ -21,15 +21,11 @@ alias g='cd ~/Git'
 alias F='echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode && F keys'
 alias v='nvim'
 alias V='nvim ~/.dotfiles/.config/nvim/init.lua'
-alias f='if [ -z "$TMUX" ]; then tmux new-session -s mysession "nvim \$(fzf)"; else nvim $(fzf); fi'
-alias g='lazygit'
-alias t='if [ -z "$TMUX" ]; then tmux new-session -s mysession; else echo "tmux session already active"; fi'
-alias j='cd ~/Git/jedwaltondev'
-alias ds='cd ~/Git/jedwaltondev/dev && ./start.sh'
 alias d='cd ~/Downloads'
 alias D='cd ~/.dotfiles'
 alias s='scrot -s ~/Pictures/screenshot_%Y-%m-%d-%H-%M-%S.png'
-alias c='ssh dev@localhost -p 2222'
+
+
 
 #Python
 alias venvactivate='source env/bin/activate'

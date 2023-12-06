@@ -56,10 +56,10 @@ require('packer').startup(function(use)
 
   use 'ellisonleao/gruvbox.nvim'
   use('folke/tokyonight.nvim')
-  use('nvim-lualine/lualine.nvim') -- Fancier statusline
+  use('nvim-lualine/lualine.nvim')           -- Fancier statusline
   use('lukas-reineke/indent-blankline.nvim') -- Add indentation guides even on blank lines
-  use('numToStr/Comment.nvim') -- "gc" to comment visual regions/lines
-  use('tpope/vim-sleuth') -- Detect tabstop and shiftwidth automatically
+  use('numToStr/Comment.nvim')               -- "gc" to comment visual regions/lines
+  use('tpope/vim-sleuth')                    -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
   use({
@@ -77,6 +77,8 @@ require('packer').startup(function(use)
 
   -- DAP
   use('puremourning/vimspector')
+  -- use('mfussenegger/nvim-dap')
+  -- use('leoluz/nvim-dap-go')
 
 
   -- AutoPairs
@@ -114,10 +116,10 @@ require('packer').startup(function(use)
 
   use {
     "ThePrimeagen/refactoring.nvim",
-      requires = {
-          {"nvim-lua/plenary.nvim"},
-          {"nvim-treesitter/nvim-treesitter"}
-      }
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-treesitter/nvim-treesitter" }
+    }
   }
 
   -- use { "github/copilot.vim" }
@@ -175,11 +177,11 @@ require('packer').startup(function(use)
 
   -- install without yarn or npm
   use({
-      "iamcco/markdown-preview.nvim",
-      run = function() vim.fn["mkdp#util#install"]() end,
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
   })
 
-  use({'fatih/vim-go'})
+  use({ 'fatih/vim-go' })
   -- use({
   --   "xiyaowong/nvim-transparent"
   -- })
@@ -193,8 +195,6 @@ require('packer').startup(function(use)
   if is_bootstrap then
     require('packer').sync()
   end
-
-
 end)
 
 -- When we are bootstrapping a configuration, it doesn't
@@ -268,7 +268,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
 vim.opt.colorcolumn = '80'
-vim.opt.background= 'dark'
+vim.opt.background = 'dark'
 vim.opt.cmdheight = 1
 -- Case insensitive searching UNLESS /C or capital in search
 vim.o.ignorecase = true
@@ -487,7 +487,8 @@ local on_attach = function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>Wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>Wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>Wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, '[W]orkspace [L]ist Folders')
+  nmap('<leader>Wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+    '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -553,7 +554,7 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true,}),
+    ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true, }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -590,7 +591,8 @@ map('n', '<C-u>', "<C-u>zz", { noremap = true, silent = false })
 
 -- Better copy and paste
 -- Yank to system clipboard using xclip in normal mode
-map('n', '<leader>y', 'yy:"_p<CR>:echo system("xclip -in -selection clipboard", @")<CR>', { noremap = true, silent = true })
+map('n', '<leader>y', 'yy:"_p<CR>:echo system("xclip -in -selection clipboard", @")<CR>',
+  { noremap = true, silent = true })
 -- Yank to system clipboard using xclip in visual mode
 map('v', '<leader>y', 'y:echo system("xclip -in -selection clipboard", @0)<CR>', { noremap = true, silent = true })
 
@@ -664,20 +666,32 @@ map('n', ',c', ':call vimspector#ClearBreakpoints()<cr>',{ noremap = true, silen
 
 -- Refactoring
 -- Remaps for the refactoring operations currently offered by the plugin
-vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+  { noremap = true, silent = true, expr = false })
+vim.api.nvim_set_keymap("v", "<leader>rf",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+  { noremap = true, silent = true, expr = false })
+vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+  { noremap = true, silent = true, expr = false })
+vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+  { noremap = true, silent = true, expr = false })
 -- Extract block doesn't need visual mode
-vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
-vim.api.nvim_set_keymap("n", "<leader>rB", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
+  { noremap = true, silent = true, expr = false })
+vim.api.nvim_set_keymap("n", "<leader>rB", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
+  { noremap = true, silent = true, expr = false })
 -- Inline variable can also pick up the identifier currently under the cursor without visual mode
-vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+  { noremap = true, silent = true, expr = false })
 
 -- Markdown
-map('n', '<leader>mp', ':MarkdownPreview<cr>',{ noremap = true, silent = false })
-map('n', '<leader>ms', ':MarkdownPreviewStop<cr>',{ noremap = true, silent = false })
-map('n', '<leader>mt', ':MarkdownPreviewToggle<cr>',{ noremap = true, silent = false })
+map('n', '<leader>mp', ':MarkdownPreview<cr>', { noremap = true, silent = false })
+map('n', '<leader>ms', ':MarkdownPreviewStop<cr>', { noremap = true, silent = false })
+map('n', '<leader>mt', ':MarkdownPreviewToggle<cr>', { noremap = true, silent = false })
+
+-- Pandocs
+map('n', '<leader>b', ':!pandoc % -o %:r.pdf<CR>', { noremap = true, silent = false })
+--
 
 -- AutoPairs
 local status, autopairs = pcall(require, 'nvim-autopairs')
@@ -703,9 +717,11 @@ map('n', '<leader>gp', ':Git push<CR>', { noremap = true, silent = false })
 map('n', '<leader>gP', ':Git pull<CR>', { noremap = true, silent = false })
 
 -- Workspace remaps
-map( 'n', '<leader>Wc', ':pwd<CR>', { desc = '[W]orkspace [C]urrent', noremap = true, silent = false })
-map( 'n', '<leader>Wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irectory', noremap = true, silent = false })
+map('n', '<leader>Wc', ':pwd<CR>', { desc = '[W]orkspace [C]urrent', noremap = true, silent = false })
+map('n', '<leader>Wd', ':cd %:p:h<CR>:pwd<CR>', { desc = '[W]orkspace [D]irectory', noremap = true, silent = false })
 map('n', '<leader>Wh', ':cd <CR>:pwd<CR>', { noremap = true, silent = false })
+
+
 
 -- ChatGPT
 -- map('n', '<leader>ai', ':ChatGPT<CR>', { noremap = true, silent = false })
