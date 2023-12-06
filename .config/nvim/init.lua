@@ -690,7 +690,9 @@ map('n', '<leader>ms', ':MarkdownPreviewStop<cr>', { noremap = true, silent = fa
 map('n', '<leader>mt', ':MarkdownPreviewToggle<cr>', { noremap = true, silent = false })
 
 -- Pandocs
-map('n', '<leader>b', ':!pandoc % -o %:r.pdf<CR>', { noremap = true, silent = false })
+map('n', '<leader>b', ':w <bar> silent !pandoc % -o %:r.pdf > /dev/null<CR>', { noremap = true, silent = true })
+
+
 --
 
 -- AutoPairs
