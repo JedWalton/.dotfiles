@@ -691,6 +691,8 @@ map('n', '<leader>mt', ':MarkdownPreviewToggle<cr>', { noremap = true, silent = 
 
 -- Pandocs
 map('n', '<leader>b', ':w <bar> silent !pandoc % -o %:r.pdf > /dev/null<CR>', { noremap = true, silent = true })
+map('n', '<leader>z', ':silent !zathura %:r.pdf &<CR>', { noremap = true, silent = true })
+
 
 
 --
