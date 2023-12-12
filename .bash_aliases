@@ -25,7 +25,8 @@ alias d='cd ~/Downloads'
 alias D='cd ~/.dotfiles'
 alias s='scrot -s ~/Pictures/screenshot_%Y-%m-%d-%H-%M-%S.png'
 
-
+# HTTP
+alias httpserver='python3 -m http.server'
 
 #Python
 alias venvactivate='source env/bin/activate'
