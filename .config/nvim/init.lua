@@ -310,7 +310,6 @@ require('lualine').setup({
 
 require('Comment').setup()
 
-require("ibl").setup()
 
 require('gitsigns').setup({
   signs = {

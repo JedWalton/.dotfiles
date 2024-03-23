@@ -65,6 +65,7 @@ nmap <, :action MoveElementLeft<CR>
 nmap >, :action MoveElementRight<CR>
 
 nmap <leader>e :NERDTreeFocus<CR>
+
 " Easy window split navigation {{{
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -93,7 +94,7 @@ map <leader>7 7gt
 map <leader>8 8gt
 map <leader>9 9gt
 map <leader>tc :tabclose<CR>
-map <leader>tn :tabnew<CR>
+"" Does not work " map <leader>tn :tabnew<CR>
 
 map <C-s>% <C-w>v
 map <C-s>" <C-w>s
