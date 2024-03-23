@@ -52,14 +52,15 @@ vmap <leader>rm :action Move<CR>
 nmap <leader>ro :action OptimizeImports<CR>
 nmap <leader>rG :action Generate<CR>
 nmap <leader>q :action CloseEditor<CR>
+
+
 nmap <leader>t :action Switcher<CR>
 vmap <leader>t :action Switcher<CR>
 nmap <leader>f :action ReformatCode<CR>
 nmap <leader>i :action ParameterInfo<cr>
 nmap <leader>% :action NewElement<CR>
-
-nmap <leader>ra :action Refactorings.QuickListPopupAction<CR>
-vmap <leader>ra <Esc>:action Refactorings.QuickListPopupAction<CR>
+nmap <leader>ca :action Refactorings.QuickListPopupAction<CR>
+vmap <leader>ca <Esc>:action Refactorings.QuickListPopupAction<CR>
 
 nmap <, :action MoveElementLeft<CR>
 nmap >, :action MoveElementRight<CR>
@@ -93,7 +94,11 @@ map <leader>6 6gt
 map <leader>7 7gt
 map <leader>8 8gt
 map <leader>9 9gt
-map <leader>tc :tabclose<CR>
+nmap <leader>tg :action CloseEditorsGroup<CR>
+vmap <leader>tg :action CloseEditorsGroup<CR>
+nmap <leader>tc :action CloseAllUnpinnedEditors<CR>
+nmap <leader>tp :action PinActiveTab<CR>
+
 "" Does not work " map <leader>tn :tabnew<CR>
 
 map <C-s>% <C-w>v
