@@ -54,8 +54,8 @@ nmap <leader>rG :action Generate<CR>
 nmap <leader>q :action CloseEditor<CR>
 
 
-nmap <leader>t :action Switcher<CR>
-vmap <leader>t :action Switcher<CR>
+nmap <leader>tt :action Switcher<CR>
+vmap <leader>tt :action Switcher<CR>
 nmap <leader>f :action ReformatCode<CR>
 nmap <leader>i :action ParameterInfo<cr>
 nmap <leader>% :action NewElement<CR>
