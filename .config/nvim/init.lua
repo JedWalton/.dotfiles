@@ -76,7 +76,7 @@ require('packer').startup(function(use)
   })
 
   -- DAP
-  use('puremourning/vimspector')
+  -- use('puremourning/vimspector')
   -- use('mfussenegger/nvim-dap')
   -- use('leoluz/nvim-dap-go')
 
@@ -310,11 +310,7 @@ require('lualine').setup({
 
 require('Comment').setup()
 
-require('indent_blankline').setup({
-  -- char = '┊',
-  char = '', -- See `:help indent_blankline.txt`
-  show_trailing_blankline_indent = false,
-})
+require("ibl").setup()
 
 require('gitsigns').setup({
   signs = {
