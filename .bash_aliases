@@ -10,12 +10,12 @@ alias cata="cat ~/.bash_aliases"
 alias sba="source ~/.bash_aliases && echo 'sourced ~/.bash_aliases'"
 alias sp="source ~/.profile && echo 'sourced ~/.profile'"
 
-alias night="xrandr --output HDMI-1 --brightness 0.3 && echo 'Owl mode'"
-alias evelate="xrandr --output HDMI-1 --brightness 0.6 && echo 'Eve late'"
-alias eve="xrandr --output HDMI-1 --brightness 0.6 && echo 'Good evening'"
-alias afternoon="xrandr --output HDMI-1 --brightness 0.8 && echo 'Good afternoon'"
-alias day="xrandr --output HDMI-1 --brightness 1 && echo 'Wakey wakey'"
-alias extremeday="xrandr --output HDMI-1 --brightness 1.1 && echo 'Wakey wakey'"
+alias night="xrandr --output HDMI-0 --brightness 0.3 && echo 'Owl mode'"
+alias evelate="xrandr --output HDMI-0 --brightness 0.6 && echo 'Eve late'"
+alias eve="xrandr --output HDMI-0 --brightness 0.6 && echo 'Good evening'"
+alias afternoon="xrandr --output HDMI-0 --brightness 0.8 && echo 'Good afternoon'"
+alias day="xrandr --output HDMI-0 --brightness 1 && echo 'Wakey wakey'"
+alias extremeday="xrandr --output HDMI-0 --brightness 1.1 && echo 'Wakey wakey'"
 
 alias g='cd ~/Git'
 alias F='echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode && F keys'
@@ -51,4 +51,4 @@ alias tsgoloc="find . -type f \( -name '*.ts' -o -name '*.js' -o -name '*.tsx' -
 
 alias tcpd='sudo tcpdump -i any -s 0 -A "tcp port ${1:-8080}"' # use like 1=8080 tcpd
 
-
+alias sshgcp='gcloud compute ssh --zone "us-central1-a" "eight-hundred-solid-ass-pounds" --project "yeah-buddy-lightweight"'

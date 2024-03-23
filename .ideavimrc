@@ -2,6 +2,7 @@ set NERDTree
 set relativenumber
 set number
 set history=10000                 " keep x lines of command line history
+set clipboard+=unnamed
 
 " Remap leader
 nnoremap <SPACE> <Nop>
@@ -15,7 +16,6 @@ vnoremap < <gv
 vnoremap > >gv
 vnoremap = =gv
 
-
 nmap <leader>? :action GotoAction<CR>
 
 " change font size
@@ -24,22 +24,20 @@ nmap - :action EditorDecreaseFontSize<CR>
 nmap <leader>= :action EditorResetFontSize<CR>
 
 " code navigation
-
 nnoremap <c-o> :action Back<cr>
 nnoremap <c-i> :action Forward<cr>
 
 nmap gr :action ShowUsages<CR>
 nmap gd :action GotoDeclaration<CR>
 nmap gi :action GotoImplementation<CR>
-nmap gs :action GotoSuperMethod<CR>
 
-nmap <leader>l :action NextTab<CR>
-nmap <leader>L :action PreviousTab<CR>
 nmap <leader>n :action GotoNextError<CR>
+vmap <leader>n :action GotoNextError<CR>
+nmap <leader>N :action GotoNextError<CR>
+vmap <leader>N :action GotoNextError<CR>
 
 nmap <leader>sf :action GotoFile<CR>
 nmap <leader>sg :action FindInPath<CR>
-
 
 nmap <leader>ri :action Inline<CR>
 nmap <leader>rr :action RenameElement<CR>
@@ -57,49 +55,29 @@ nmap <leader>q :action CloseEditor<CR>
 nmap <leader>t :action Switcher<CR>
 vmap <leader>t :action Switcher<CR>
 nmap <leader>f :action ReformatCode<CR>
+nmap <leader>i :action ParameterInfo<cr>
+nmap <leader>% :action NewElement<CR>
+
+nmap <leader>ra :action Refactorings.QuickListPopupAction<CR>
+vmap <leader>ra <Esc>:action Refactorings.QuickListPopupAction<CR>
 
 nmap <, :action MoveElementLeft<CR>
 nmap >, :action MoveElementRight<CR>
 
-
-nnoremap <leader>e :NERDTreeFocus<CR>
+nmap <leader>e :NERDTreeFocus<CR>
 " Easy window split navigation {{{
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <C-h> <C-w>h
 
-
-" Some Git Shortcuts for view status, pull, and branches
-" Mapping mimic Fugitive in my native vim
-nmap <Leader>gs :action CheckinProject<CR>
-nmap <Leader>gc :action CheckinProject<CR>
-nmap <Leader>ga :action Git.Add<CR>
-nmap <Leader>gp :action Git.Pull<CR>
-nmap <Leader>gn :action Annotate<CR>
-nmap <Leader>gl :action Git.Log<CR>
-nmap <Leader>go :action Github.Open.In.Browser<CR>
-nmap <Leader>br :action Git.Branches<CR>
-nmap <Leader>gb :action Git.Branches<CR>
-
-" Building, Running and Debugging
-nmap ,c :action CompileDirty<cr>
-nmap ,r :action Run<cr>
-nmap ,R :action RunAnything<cr>
+" Debugging
 nmap ,d :action Debug<cr>
-nmap ,c :action RunClass<cr>
-nmap ,D :action DebugClass<cr>
-nmap ,t :action RerunTests<cr>
-nmap ,T :action RerunFailedTests<cr>
+nmap ,o :action SetOver<CR>
+nmap ,i :action StepInto<CR>
+nmap ,t :action StepOut<CR>
 nmap ,b :action ToggleLineBreakpoint<cr>
-nmap ,i :action ParameterInfo<cr>
-
-nmap <leader>dl :action Debug<CR>
-nmap <leader>do :action SetOver<CR>
-nmap <leader>dt :action StepOut<CR>
-nmap <leader>di :action StepInto<CR>
-nmap <leader>db :action ToggleLineBreakpoint<CR>
-
+nmap ,c :action Debugger.RemoveAllBreakpointsInFile<CR>
 
 " Commenting
 nmap <Leader>gc :action CommentByLineComment<CR>
@@ -114,7 +92,6 @@ map <leader>6 6gt
 map <leader>7 7gt
 map <leader>8 8gt
 map <leader>9 9gt
-map <leader>q :tabclose<CR>
 map <leader>tc :tabclose<CR>
 map <leader>tn :tabnew<CR>
 
@@ -122,7 +99,6 @@ map <C-s>% <C-w>v
 map <C-s>" <C-w>s
 map <C-s>x :tabclose<CR>
 
-set clipboard+=unnamed
 
 map <C-u> <C-u>zz
 map <C-d> <C-d>zz
