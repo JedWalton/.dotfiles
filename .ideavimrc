@@ -39,6 +39,8 @@ vmap <leader>N :action GotoNextError<CR>
 nmap <leader>sf :action GotoFile<CR>
 nmap <leader>sg :action FindInPath<CR>
 
+
+" Refactorings
 nmap <leader>ri :action Inline<CR>
 nmap <leader>rr :action RenameElement<CR>
 nmap <leader>rev :action IntroduceVariable<CR>
@@ -53,14 +55,21 @@ nmap <leader>ro :action OptimizeImports<CR>
 nmap <leader>rG :action Generate<CR>
 nmap <leader>q :action CloseEditor<CR>
 
+" Generic Refactorings
+nmap <leader>ca :action Refactorings.QuickListPopupAction<CR>
+vmap <leader>ca <Esc>:action Refactorings.QuickListPopupAction<CR>
+nmap <leader>rf :action Refactorings.QuickListPopupAction<CR>
+vmap <leader>rf <Esc>:action Refactorings.QuickListPopupAction<CR>
+
 
 nmap <leader>tt :action Switcher<CR>
 vmap <leader>tt :action Switcher<CR>
 nmap <leader>f :action ReformatCode<CR>
 nmap <leader>i :action ParameterInfo<cr>
 nmap <leader>% :action NewElement<CR>
-nmap <leader>ca :action Refactorings.QuickListPopupAction<CR>
-vmap <leader>ca <Esc>:action Refactorings.QuickListPopupAction<CR>
+
+
+nmap <leader>G :action VcsGroups<CR>
 
 nmap <, :action MoveElementLeft<CR>
 nmap >, :action MoveElementRight<CR>
