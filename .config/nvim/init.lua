@@ -586,10 +586,16 @@ map('n', '<C-u>', "<C-u>zz", { noremap = true, silent = false })
 
 -- Better copy and paste
 -- Yank to system clipboard using xclip in normal mode
-map('n', '<leader>y', 'yy:"_p<CR>:echo system("xclip -in -selection clipboard", @")<CR>',
-  { noremap = true, silent = true })
--- Yank to system clipboard using xclip in visual mode
-map('v', '<leader>y', 'y:echo system("xclip -in -selection clipboard", @0)<CR>', { noremap = true, silent = true })
+-- map('n', '<leader>y', 'yy:"_p<CR>:echo system("xclip -in -selection clipboard", @")<CR>',
+--   { noremap = true, silent = true })
+-- -- Yank to system clipboard using xclip in visual mode
+-- map('v', '<leader>y', 'y:echo system("xclip -in -selection clipboard", @0)<CR>', { noremap = true, silent = true })
+
+-- Mac Copy and Paste
+vim.api.nvim_set_keymap('n', '<leader>y', 'yy:<C-U>lua vim.fn.system("pbcopy", vim.fn.getreg("0"))<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>y', 'y:<C-U>lua vim.fn.system("pbcopy", vim.fn.getreg("0"))<CR>', { noremap = true, silent = true })
+
+
 
 -- Smart way to move between windows
 map('n', '<C-h>', '<C-W>h', { noremap = true, silent = false })
