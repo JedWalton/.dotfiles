@@ -77,8 +77,8 @@ sudo apt-get update -y
 sudo apt-get install -y yarn
 
 # Install Go
-sudo curl -O https://storage.googleapis.com/golang/go1.21.0.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
+sudo curl -O https://storage.googleapis.com/golang/go1.22.4.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
 sudo grep -qxF 'export PATH=$PATH:/usr/local/go/bin' ~/.profile || echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
 # Set GOPATH and add its bin directory to PATH if they're not already there
 grep -qxF 'export GOPATH=$HOME/go' ~/.profile || echo 'export GOPATH=$HOME/go' >> ~/.profile
@@ -118,7 +118,6 @@ sudo apt install texlive-full -y
 sudo apt update
 sudo apt -y install i3
 sudo apt --fix-broken install
-
 sudo apt install i3lock xautolock
 
 # Install Tmux
