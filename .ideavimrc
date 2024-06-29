@@ -108,8 +108,6 @@ vmap <leader>tg :action CloseEditorsGroup<CR>
 nmap <leader>tc :action CloseAllUnpinnedEditors<CR>
 nmap <leader>tp :action PinActiveTab<CR>
 
-"" Does not work " map <leader>tn :tabnew<CR>
-
 map <C-s>% <C-w>v
 map <C-s>" <C-w>s
 map <C-s>x :tabclose<CR>

@@ -119,6 +119,8 @@ sudo apt update
 sudo apt -y install i3
 sudo apt --fix-broken install
 
+sudo apt install i3lock xautolock
+
 # Install Tmux
 sudo apt update
 sudo apt install -y git automake build-essential pkg-config libevent-dev libncurses5-dev bison
