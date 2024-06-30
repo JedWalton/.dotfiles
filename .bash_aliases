@@ -52,3 +52,4 @@ alias tsgoloc="find . -type f \( -name '*.ts' -o -name '*.js' -o -name '*.tsx' -
 alias tcpd='sudo tcpdump -i any -s 0 -A "tcp port ${1:-8080}"' # use like 1=8080 tcpd
 
 alias sshgcp='gcloud compute ssh --zone "us-central1-a" "eight-hundred-solid-ass-pounds" --project "yeah-buddy-lightweight"'
+alias vmode='set -o vi'
