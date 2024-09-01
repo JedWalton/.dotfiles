@@ -6,3 +6,10 @@ bin/*
 !bin/install.sh
 !bin/readme.md
 
+
+.config/containers/
+.config/gcloud/
+.config/github-copilot/
+.config/stripe/
+.config/thefuck/
+.zshrc
