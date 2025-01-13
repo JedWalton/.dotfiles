@@ -55,5 +55,6 @@ alias sshgcp='gcloud compute ssh --zone "us-central1-a" "eight-hundred-solid-ass
 
 alias c='clear'
 
-alias w='nvim ~/.workingmemory'
-alias n='nvim ~/.notes'
+alias w='nvim ~/drive/.workingmemory'
+alias n='nvim ~/drive/.notes'
+alias k8080='kill $(lsof -t -i:8080)'
