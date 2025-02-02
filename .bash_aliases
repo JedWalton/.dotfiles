@@ -1,7 +1,8 @@
 alias dcu="docker compose up"
 alias dcd="docker compose down -v"
 alias dp='docker rmi $(docker images -q)'
-alias nuke='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -aq) -f && docker volume rm $(docker volume ls -q)'
+#alias nuke='docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -aq) -f && docker volume rm $(docker volume ls -q)'
+alias nuke='podman stop $(podman ps -aq) && podman rm $(podman ps -aq) && podman rmi $(podman images -aq) -f && podman volume rm $(podman volume ls -q)'
 alias sudonuke='sudo docker stop $(sudo docker ps -aq) && sudo docker rm $(sudo docker ps -aq) && sudo docker rmi $(sudo docker images -aq) -f && sudo docker volume rm $(sudo docker volume ls -q)'
 alias prune='docker system prune -a && docker volume prune'
 
